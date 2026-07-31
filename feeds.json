@@ -1,17 +1,11 @@
 {
-  "maxItems": 24,
-  "perFeed": 5,
+  "maxItems": 40,
+  "perFeed": 6,
   "feeds": [
     {
       "id": "mit-ai",
       "name": "MIT News — AI",
       "url": "https://news.mit.edu/rss/topic/artificial-intelligence2",
-      "topics": ["ai"]
-    },
-    {
-      "id": "arxiv-ai",
-      "name": "arXiv cs.AI",
-      "url": "https://rss.arxiv.org/rss/cs.AI",
       "topics": ["ai"]
     },
     {
@@ -21,28 +15,58 @@
       "topics": ["ai"]
     },
     {
-      "id": "nature-sus",
-      "name": "Nature — Sustainability",
-      "url": "https://www.nature.com/subjects/sustainability.rss",
-      "topics": ["sus"]
+      "id": "verge-ai",
+      "name": "The Verge — AI",
+      "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+      "topics": ["ai"]
     },
     {
-      "id": "bbc-science",
-      "name": "BBC Science & Environment",
-      "url": "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
-      "topics": ["sus"]
+      "id": "gnews-ai-edu",
+      "name": "Google News — AI Education",
+      "url": "https://news.google.com/rss/search?q=AI+education+OR+%22artificial+intelligence%22+university+OR+classroom&hl=en-US&gl=US&ceid=US:en",
+      "topics": ["edu", "ai"]
     },
     {
-      "id": "climate-news",
-      "name": "Climate Home News",
-      "url": "https://www.climatechangenews.com/feed/",
-      "topics": ["sus"]
+      "id": "gnews-mis-edu",
+      "name": "Google News — MIS Education",
+      "url": "https://news.google.com/rss/search?q=%22MIS%22+OR+%22management+information+systems%22+education+OR+curriculum&hl=en-US&gl=US&ceid=US:en",
+      "topics": ["edu"]
     },
     {
-      "id": "sciencedaily-earth",
-      "name": "ScienceDaily — Earth & Climate",
-      "url": "https://www.sciencedaily.com/rss/earth_climate.xml",
-      "topics": ["sus", "edu"]
+      "id": "gnews-ai-bschool",
+      "name": "Google News — AI in Business Schools",
+      "url": "https://news.google.com/rss/search?q=AI+%22business+school%22+OR+%22MBA%22+%22artificial+intelligence%22+curriculum+OR+education&hl=en-US&gl=US&ceid=US:en",
+      "topics": ["edu", "ai"]
+    },
+    {
+      "id": "campus-tech",
+      "name": "Campus Technology",
+      "url": "https://campustechnology.com/rss-feeds/news.aspx",
+      "topics": ["edu"]
+    },
+    {
+      "id": "techcrunch-edtech",
+      "name": "TechCrunch — EdTech",
+      "url": "https://techcrunch.com/tag/edtech/feed/",
+      "topics": ["edu", "ai"]
+    },
+    {
+      "id": "poets-quants",
+      "name": "Poets&Quants",
+      "url": "https://poetsandquants.com/feed/",
+      "topics": ["edu"]
+    },
+    {
+      "id": "mit-sloan",
+      "name": "MIT Sloan Management Review",
+      "url": "https://sloanreview.mit.edu/feed/",
+      "topics": ["edu", "ai"]
+    },
+    {
+      "id": "misq",
+      "name": "MIS Quarterly",
+      "url": "https://aisel.aisnet.org/misq/recent.rss",
+      "topics": ["edu"]
     }
   ]
 }

@@ -13,28 +13,20 @@ python3 -m http.server 8080
 
 Open http://localhost:8080
 
-## Collect articles from the web (automatic)
+## Private collection (local only)
 
-SAIL pulls **headlines + short excerpts + source links** from RSS feeds (not full republished articles).
+Headlines are collected for **you only**. `js/collected.js` is gitignored and is **not** published to GitHub Pages.
 
-Sources are listed in `feeds.json`. Edit that file to add/remove feeds.
-
-### Run locally
+Feeds (edit `feeds.json`):
+- **AI news** — MIT News, TechCrunch, The Verge
+- **Learning** — AI education, MIS education, AI in business schools (Google News queries), Campus Technology, TechCrunch EdTech, Poets&Quants, MIT Sloan Review, MIS Quarterly
 
 ```bash
 python3 scripts/collect_feeds.py
+python3 -m http.server 8080
 ```
 
-This updates `js/collected.js`. Review on the home page (**Collected**) or `/collected/`.
-
-### Run automatically on GitHub
-
-A GitHub Action (`.github/workflows/collect-feeds.yml`) runs **daily** and on demand:
-
-1. Open the repo → **Actions** → **Collect feeds** → **Run workflow**
-2. Or wait for the daily schedule
-
-After it commits, GitHub Pages refreshes with the new headlines.
+Then open http://localhost:8080/collected/ — not linked from the public site.
 
 ## Write an article (Chinese → auto EN / KO)
 
@@ -50,7 +42,7 @@ cp drafts/sample-green-campus.md drafts/my-article.md
 ---
 slug: my-article          # becomes articles/my-article.html
 date: 2026-07-31
-topics: [ai, sus, edu]    # any of: ai, sus, edu
+topics: [ai, sus, edu]    # any of: ai, sus, edu (edu = Learning)
 minutes: 5
 title: 中文标题
 excerpt: 中文摘要（列表里显示）

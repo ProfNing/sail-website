@@ -4,3 +4,5 @@ __pycache__/
 .venv/
 venv/
 .env
+# Private collected headlines — local only, never publish
+js/collected.js
