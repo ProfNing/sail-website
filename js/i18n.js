@@ -19,6 +19,7 @@ window.WEAVE_I18N = {
       brand: "SAIL 启航",
       ctaArticles: "Articles",
       ctaAbout: "About",
+      pillarAi: "Artificial Intelligence",
     },
     latest: {
       eyebrow: "Latest",
@@ -80,6 +81,7 @@ window.WEAVE_I18N = {
       brand: "SAIL 启航",
       ctaArticles: "文章",
       ctaAbout: "关于",
+      pillarAi: "人工智能",
     },
     latest: {
       eyebrow: "最新",
@@ -141,6 +143,7 @@ window.WEAVE_I18N = {
       brand: "SAIL 启航",
       ctaArticles: "글",
       ctaAbout: "소개",
+      pillarAi: "AI",
     },
     latest: {
       eyebrow: "최근",

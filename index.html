@@ -44,35 +44,16 @@
 
   <main>
     <section class="hero">
-      <svg class="hero__canvas" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#1a4a3a"/>
-            <stop offset="100%" stop-color="#0c1914"/>
-          </linearGradient>
-        </defs>
-        <rect width="1200" height="800" fill="url(#g1)"/>
-        <path class="strand-path strand-path--sus" d="M-20 620 C 200 480, 320 720, 520 520 S 820 280, 1020 420 S 1220 560, 1280 480"/>
-        <path class="strand-path strand-path--ai" d="M-20 200 C 180 360, 340 80, 540 260 S 780 520, 980 340 S 1180 120, 1280 220"/>
-        <path class="strand-path strand-path--edu" d="M-20 400 C 220 400, 300 220, 480 380 S 760 600, 940 400 S 1140 200, 1280 360"/>
-        <g class="float-node" fill="#6dca86" opacity="0.85">
-          <circle cx="520" cy="520" r="7"/>
-        </g>
-        <g class="float-node" fill="#5eb3d1" opacity="0.85">
-          <circle cx="540" cy="260" r="7"/>
-        </g>
-        <g class="float-node" fill="#e0a05a" opacity="0.9">
-          <circle cx="480" cy="380" r="7"/>
-        </g>
-        <g opacity="0.12" fill="none" stroke="#e8f2ec" stroke-width="1">
-          <circle cx="700" cy="360" r="120"/>
-          <circle cx="700" cy="360" r="200"/>
-          <circle cx="700" cy="360" r="290"/>
-        </g>
-      </svg>
+      <div class="hero__media" aria-hidden="true">
+        <img src="assets/hero.jpg" alt="" width="1920" height="1080" />
+      </div>
       <div class="hero__veil"></div>
       <div class="hero__content">
-        <p class="hero__tagline" data-i18n="hero.brandNote">Sustainability · AI · Learning</p>
+        <p class="hero__pillars">
+          <a class="hero__pillar hero__pillar--sus" href="topics/sustainability.html" data-i18n="nav.sustainability">Sustainability</a>
+          <a class="hero__pillar hero__pillar--ai" href="topics/ai.html" data-i18n="hero.pillarAi">Artificial Intelligence</a>
+          <a class="hero__pillar hero__pillar--edu" href="topics/education.html" data-i18n="nav.education">Learning</a>
+        </p>
         <div class="cta-row">
           <a class="btn btn--primary" href="articles/index.html" data-i18n="hero.ctaArticles">Articles</a>
           <a class="btn btn--ghost" href="about.html" data-i18n="hero.ctaAbout">About</a>
@@ -97,7 +78,7 @@
   <footer class="site-footer">
     <div class="site-footer__inner">
       <div>
-        <a class="brand brand--footer" href="index.html" aria-label="SAIL 启航 출항">
+        <a class="brand brand--footer" href="index.html" aria-label="SAIL">
           <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="#2f7a45" d="M12.2 3.2v12.2H19L12.2 3.2z"/>
           <path fill="#1f6f8b" d="M11.8 5.5v9.9H5.2L11.8 5.5z"/>
@@ -105,6 +86,7 @@
           <path fill="#0c1914" d="M3.2 17.2h17.6l-1.8 2.8H5z"/>
           <path fill="none" stroke="#1f6f8b" stroke-width="1.2" stroke-linecap="round" d="M3.5 20.6c2.8-.9 5.6-.9 8.5 0s5.7.9 8.5 0"/>
         </svg>
+          <span class="brand__sail">SAIL</span>
         </a>
         <p data-i18n="meta.tagline">Sustainability · AI · Learning</p>
       </div>
