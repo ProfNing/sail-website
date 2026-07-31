@@ -633,11 +633,21 @@ body.lang-ko {
   font-size: 0.95rem;
 }
 
-.article-item__arrow {
-  font-size: 1.25rem;
+.collected-updated {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
   color: var(--muted);
-  transition: transform 0.35s var(--ease), color 0.25s ease;
 }
+
+.collected-empty {
+  color: var(--ink-soft);
+  padding: 1rem 0 2rem;
+}
+
+.article-item--external .article-item__arrow {
+  font-size: 1.1rem;
+}
+
 
 .article-item:hover .article-item__arrow {
   transform: translateX(4px);

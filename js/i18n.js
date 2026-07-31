@@ -12,6 +12,7 @@ window.WEAVE_I18N = {
       sustainability: "Sustainability",
       education: "Learning",
       about: "About",
+      collected: "Collected",
       menu: "Menu",
     },
     hero: {
@@ -25,6 +26,15 @@ window.WEAVE_I18N = {
       eyebrow: "Latest",
       title: "Articles",
       viewAll: "All articles",
+    },
+    collected: {
+      eyebrow: "From the web",
+      title: "Collected",
+      viewAll: "All collected",
+      lead: "Headlines gathered automatically from trusted sources. Links open the original articles.",
+      source: "Source",
+      empty: "No collected items yet. Run the collector or wait for the daily update.",
+      updated: "Updated",
     },
     articlesPage: {
       title: "Articles",
@@ -74,6 +84,7 @@ window.WEAVE_I18N = {
       sustainability: "可持续",
       education: "学习",
       about: "关于",
+      collected: "采集",
       menu: "菜单",
     },
     hero: {
@@ -87,6 +98,15 @@ window.WEAVE_I18N = {
       eyebrow: "最新",
       title: "文章",
       viewAll: "全部文章",
+    },
+    collected: {
+      eyebrow: "来自网络",
+      title: "采集",
+      viewAll: "全部采集",
+      lead: "自动汇集可信来源的标题与摘要，点击前往原文。",
+      source: "来源",
+      empty: "暂无采集内容。请运行采集脚本，或等待每日更新。",
+      updated: "更新于",
     },
     articlesPage: {
       title: "文章",
@@ -136,6 +156,7 @@ window.WEAVE_I18N = {
       sustainability: "지속가능성",
       education: "학습",
       about: "소개",
+      collected: "수집",
       menu: "메뉴",
     },
     hero: {
@@ -149,6 +170,15 @@ window.WEAVE_I18N = {
       eyebrow: "최근",
       title: "글",
       viewAll: "모든 글",
+    },
+    collected: {
+      eyebrow: "웹에서",
+      title: "수집",
+      viewAll: "전체 수집",
+      lead: "신뢰할 수 있는 출처에서 자동으로 모은 헤드라인입니다. 원문으로 이동합니다.",
+      source: "출처",
+      empty: "수집된 항목이 없습니다. 수집 스크립트를 실행하거나 일일 업데이트를 기다리세요.",
+      updated: "업데이트",
     },
     articlesPage: {
       title: "글",

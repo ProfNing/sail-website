@@ -13,6 +13,29 @@ python3 -m http.server 8080
 
 Open http://localhost:8080
 
+## Collect articles from the web (automatic)
+
+SAIL pulls **headlines + short excerpts + source links** from RSS feeds (not full republished articles).
+
+Sources are listed in `feeds.json`. Edit that file to add/remove feeds.
+
+### Run locally
+
+```bash
+python3 scripts/collect_feeds.py
+```
+
+This updates `js/collected.js`. Review on the home page (**Collected**) or `/collected/`.
+
+### Run automatically on GitHub
+
+A GitHub Action (`.github/workflows/collect-feeds.yml`) runs **daily** and on demand:
+
+1. Open the repo → **Actions** → **Collect feeds** → **Run workflow**
+2. Or wait for the daily schedule
+
+After it commits, GitHub Pages refreshes with the new headlines.
+
 ## Write an article (Chinese → auto EN / KO)
 
 1. Copy the sample draft and edit in Chinese:

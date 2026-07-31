@@ -1,0 +1,48 @@
+{
+  "maxItems": 24,
+  "perFeed": 5,
+  "feeds": [
+    {
+      "id": "mit-ai",
+      "name": "MIT News — AI",
+      "url": "https://news.mit.edu/rss/topic/artificial-intelligence2",
+      "topics": ["ai"]
+    },
+    {
+      "id": "arxiv-ai",
+      "name": "arXiv cs.AI",
+      "url": "https://rss.arxiv.org/rss/cs.AI",
+      "topics": ["ai"]
+    },
+    {
+      "id": "techcrunch-ai",
+      "name": "TechCrunch — AI",
+      "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "topics": ["ai"]
+    },
+    {
+      "id": "nature-sus",
+      "name": "Nature — Sustainability",
+      "url": "https://www.nature.com/subjects/sustainability.rss",
+      "topics": ["sus"]
+    },
+    {
+      "id": "bbc-science",
+      "name": "BBC Science & Environment",
+      "url": "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
+      "topics": ["sus"]
+    },
+    {
+      "id": "climate-news",
+      "name": "Climate Home News",
+      "url": "https://www.climatechangenews.com/feed/",
+      "topics": ["sus"]
+    },
+    {
+      "id": "sciencedaily-earth",
+      "name": "ScienceDaily — Earth & Climate",
+      "url": "https://www.sciencedaily.com/rss/earth_climate.xml",
+      "topics": ["sus", "edu"]
+    }
+  ]
+}

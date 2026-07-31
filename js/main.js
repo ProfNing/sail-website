@@ -133,6 +133,35 @@
     return (window.WEAVE_ARTICLES || []).filter((a) => a.topics.includes(topic));
   }
 
+  function renderCollectedList(container, items, lang) {
+    if (!container) return;
+    if (!items || !items.length) {
+      container.innerHTML = `<p class="collected-empty">${t("collected.empty", lang)}</p>`;
+      return;
+    }
+    container.innerHTML = items
+      .map((a) => {
+        const tags = (a.topics || [])
+          .map((tp) => `<span class="tag ${topicClass(tp)}">${topicLabel(tp, lang)}</span>`)
+          .join("");
+        const safeTitle = String(a.title || "").replace(/</g, "&lt;");
+        const safeExcerpt = String(a.excerpt || "").replace(/</g, "&lt;");
+        const safeSource = String(a.source || "").replace(/</g, "&lt;");
+        const safeUrl = String(a.url || "#").replace(/"/g, "&quot;");
+        return `
+          <a class="article-item article-item--external" href="${safeUrl}" target="_blank" rel="noopener noreferrer">
+            <span class="article-item__meta">${formatDate(a.date, lang)}</span>
+            <span>
+              <h3>${safeTitle}</h3>
+              <p>${safeExcerpt}</p>
+              <span class="tags">${tags}<span class="tag">${t("collected.source", lang)}: ${safeSource}</span></span>
+            </span>
+            <span class="article-item__arrow" aria-hidden="true">↗</span>
+          </a>`;
+      })
+      .join("");
+  }
+
   function setLang(lang) {
     if (!SUPPORTED.includes(lang)) return;
     localStorage.setItem(STORAGE_KEY, lang);
@@ -152,6 +181,23 @@
     if (topic) {
       const key = topic.getAttribute("data-topic");
       renderArticleList(topic, filterByTopic(key), lang, topic.dataset.base || "");
+    }
+
+    const collectedLatest = document.querySelector("[data-collected-list='latest']");
+    if (collectedLatest) {
+      const items = ((window.SAIL_COLLECTED && window.SAIL_COLLECTED.items) || []).slice(0, 5);
+      renderCollectedList(collectedLatest, items, lang);
+    }
+
+    const collectedAll = document.querySelector("[data-collected-list='all']");
+    if (collectedAll) {
+      renderCollectedList(collectedAll, (window.SAIL_COLLECTED && window.SAIL_COLLECTED.items) || [], lang);
+    }
+
+    const updatedEl = document.querySelector("[data-collected-updated]");
+    if (updatedEl && window.SAIL_COLLECTED && window.SAIL_COLLECTED.updated) {
+      const day = String(window.SAIL_COLLECTED.updated).slice(0, 10);
+      updatedEl.textContent = t("collected.updated", lang) + " " + formatDate(day, lang);
     }
 
     document.dispatchEvent(new CustomEvent("weave:lang", { detail: { lang } }));

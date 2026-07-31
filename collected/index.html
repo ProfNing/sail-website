@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Articles</title>
-  <meta data-page-title="articlesPage.title" />
+  <title>Collected</title>
+  <meta data-page-title="collected.title" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%232f7a45' d='M16.2 4v16h9L16.2 4z'/%3E%3Cpath fill='%231f6f8b' d='M15.8 7v13H7L15.8 7z'/%3E%3Cpath stroke='%23101c17' stroke-width='1.6' d='M16 4v17'/%3E%3Cpath fill='%230c1914' d='M5 22.5h22l-2.2 3.5H7.2z'/%3E%3C/svg%3E" />
 </head>
@@ -28,8 +28,8 @@
       </button>
       <nav class="nav" aria-label="Primary">
         <a href="../index.html" data-i18n="nav.home">Home</a>
-        <a href="index.html" aria-current="page" data-i18n="nav.articles">Articles</a>
-        <a href="../collected/index.html" data-i18n="nav.collected">Collected</a>
+        <a href="../articles/index.html" data-i18n="nav.articles">Articles</a>
+        <a href="index.html" aria-current="page" data-i18n="nav.collected">Collected</a>
         <a href="../topics/ai.html" data-i18n="nav.ai">AI</a>
         <a href="../topics/sustainability.html" data-i18n="nav.sustainability">Sustainability</a>
         <a href="../topics/education.html" data-i18n="nav.education">Learning</a>
@@ -45,11 +45,13 @@
 
   <main>
     <div class="wrap page-intro">
-      <h1 class="display" data-i18n="articlesPage.title">Articles</h1>
+      <h1 class="display" data-i18n="collected.title">Collected</h1>
+      <p class="lead" data-i18n="collected.lead">Headlines gathered automatically from trusted sources. Links open the original articles.</p>
+      <p class="collected-updated" data-collected-updated></p>
     </div>
     <section class="section" style="padding-top:0.5rem">
       <div class="wrap">
-        <div class="article-list reveal" data-article-list="all" data-base=""></div>
+        <div class="article-list reveal" data-collected-list="all"></div>
       </div>
     </section>
   </main>
@@ -68,19 +70,17 @@
           <span class="brand__sail">SAIL</span>
         </a>
         <p data-i18n="meta.tagline">Sustainability · AI · Learning</p>
-        </div>
+      </div>
       <nav class="footer-nav">
-        <a href="index.html" data-i18n="nav.articles">Articles</a>
-        <a href="../collected/index.html" data-i18n="nav.collected">Collected</a>
-        <a href="../topics/ai.html" data-i18n="nav.ai">AI</a>
-        <a href="../topics/sustainability.html" data-i18n="nav.sustainability">Sustainability</a>
-        <a href="../topics/education.html" data-i18n="nav.education">Learning</a>
+        <a href="../articles/index.html" data-i18n="nav.articles">Articles</a>
+        <a href="index.html" data-i18n="nav.collected">Collected</a>
         <a href="../about.html" data-i18n="nav.about">About</a>
       </nav>
     </div>
   </footer>
 
   <script src="../js/i18n.js"></script>
+  <script src="../js/collected.js"></script>
   <script src="../js/main.js"></script>
 </body>
 </html>
