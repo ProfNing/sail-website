@@ -1,0 +1,2 @@
+# No third-party packages required.
+# publish_article.py uses Python’s standard library + Google’s public translate endpoint.

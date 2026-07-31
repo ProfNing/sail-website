@@ -1,0 +1,257 @@
+/* SAIL — i18n strings (en / zh / ko) */
+window.WEAVE_I18N = {
+  en: {
+    meta: {
+      siteName: "SAIL 启航",
+      tagline: "Sustainability · AI · Learning",
+    },
+    nav: {
+      home: "Home",
+      articles: "Articles",
+      ai: "AI",
+      sustainability: "Sustainability",
+      education: "Learning",
+      about: "About",
+      menu: "Menu",
+    },
+    hero: {
+      brandNote: "Sustainability · AI · Learning",
+      brand: "SAIL 启航",
+      ctaArticles: "Articles",
+      ctaAbout: "About",
+    },
+    latest: {
+      eyebrow: "Latest",
+      title: "Articles",
+      viewAll: "All articles",
+    },
+    articlesPage: {
+      title: "Articles",
+    },
+    about: {
+      title: "About",
+      p1: "Sustainability, AI, and Learning.",
+      sideTitle: "Topics",
+      sideAi: "AI",
+      sideSus: "Sustainability",
+      sideEdu: "Learning",
+    },
+    topics: {
+      ai: {
+        badge: "AI",
+        title: "AI",
+        related: "Also see",
+      },
+      sus: {
+        badge: "Sustainability",
+        title: "Sustainability",
+        related: "Also see",
+      },
+      edu: {
+        badge: "Learning",
+        title: "Learning",
+        related: "Also see",
+      },
+    },
+    common: {
+      read: "Read",
+      minRead: "min read",
+      backArticles: "← All articles",
+      topics: "Topics",
+    },
+  },
+
+  zh: {
+    meta: {
+      siteName: "SAIL 启航",
+      tagline: "可持续 · 人工智能 · 学习",
+    },
+    nav: {
+      home: "首页",
+      articles: "文章",
+      ai: "人工智能",
+      sustainability: "可持续",
+      education: "学习",
+      about: "关于",
+      menu: "菜单",
+    },
+    hero: {
+      brandNote: "可持续 · 人工智能 · 学习",
+      brand: "SAIL 启航",
+      ctaArticles: "文章",
+      ctaAbout: "关于",
+    },
+    latest: {
+      eyebrow: "最新",
+      title: "文章",
+      viewAll: "全部文章",
+    },
+    articlesPage: {
+      title: "文章",
+    },
+    about: {
+      title: "关于",
+      p1: "可持续、人工智能与学习。",
+      sideTitle: "主题",
+      sideAi: "人工智能",
+      sideSus: "可持续",
+      sideEdu: "学习",
+    },
+    topics: {
+      ai: {
+        badge: "人工智能",
+        title: "人工智能",
+        related: "另见",
+      },
+      sus: {
+        badge: "可持续",
+        title: "可持续",
+        related: "另见",
+      },
+      edu: {
+        badge: "学习",
+        title: "学习",
+        related: "另见",
+      },
+    },
+    common: {
+      read: "阅读",
+      minRead: "分钟阅读",
+      backArticles: "← 全部文章",
+      topics: "主题",
+    },
+  },
+
+  ko: {
+    meta: {
+      siteName: "SAIL 启航",
+      tagline: "지속가능성 · AI · 학습",
+    },
+    nav: {
+      home: "홈",
+      articles: "글",
+      ai: "AI",
+      sustainability: "지속가능성",
+      education: "학습",
+      about: "소개",
+      menu: "메뉴",
+    },
+    hero: {
+      brandNote: "지속가능성 · AI · 학습",
+      brand: "SAIL 启航",
+      ctaArticles: "글",
+      ctaAbout: "소개",
+    },
+    latest: {
+      eyebrow: "최근",
+      title: "글",
+      viewAll: "모든 글",
+    },
+    articlesPage: {
+      title: "글",
+    },
+    about: {
+      title: "소개",
+      p1: "지속가능성, AI, 그리고 학습.",
+      sideTitle: "주제",
+      sideAi: "AI",
+      sideSus: "지속가능성",
+      sideEdu: "학습",
+    },
+    topics: {
+      ai: {
+        badge: "AI",
+        title: "AI",
+        related: "함께 보기",
+      },
+      sus: {
+        badge: "지속가능성",
+        title: "지속가능성",
+        related: "함께 보기",
+      },
+      edu: {
+        badge: "학습",
+        title: "학습",
+        related: "함께 보기",
+      },
+    },
+    common: {
+      read: "읽기",
+      minRead: "분 소요",
+      backArticles: "← 모든 글",
+      topics: "주제",
+    },
+  },
+};
+
+/* Article catalog — multilingual bodies live on article pages via [data-lang] blocks */
+window.WEAVE_ARTICLES = [
+  {
+    id: "sample-green-campus",
+    href: "sample-green-campus.html",
+    date: "2026-07-31",
+    minutes: 4,
+    topics: ["sus", "edu", "ai"],
+    title: {
+      en: "Green campus starts with a data class",
+      zh: "绿色校园从一堂数据课开始",
+      ko: "그린 캠퍼스는 데이터 클래스로 시작됩니다",
+    },
+    excerpt: {
+      en: "Use local energy consumption data and simple models to make sustainable learning visible and tangible.",
+      zh: "用本地能耗数据与简易模型，让可持续学习看得见、摸得着。",
+      ko: "지역 에너지 소비 데이터와 간단한 모델을 사용하여 지속 가능한 학습을 ​​가시적이고 실질적으로 만듭니다.",
+    },
+  },
+  {
+    id: "green-intelligence",
+    href: "green-intelligence.html",
+    date: "2026-07-12",
+    minutes: 8,
+    topics: ["ai", "sus", "edu"],
+    title: {
+      en: "Green Intelligence: Teaching Models to Cost Less Earth",
+      zh: "绿色智能：让模型少消耗一点地球",
+      ko: "녹색 지능: 지구를 덜 쓰도록 모델을 가르치기",
+    },
+    excerpt: {
+      en: "AI’s carbon and water footprint is a curriculum problem as much as an engineering one.",
+      zh: "人工智能的碳与水足迹，既是工程问题，也是课程问题。",
+      ko: "AI의 탄소·물 발자국은 공학 문제인 동시에 교육과정 문제입니다.",
+    },
+  },
+  {
+    id: "climate-classrooms",
+    href: "climate-classrooms.html",
+    date: "2026-06-28",
+    minutes: 7,
+    topics: ["edu", "sus", "ai"],
+    title: {
+      en: "Climate Classrooms Without Apocalypse Fatigue",
+      zh: "气候课堂：避开末日疲劳",
+      ko: "종말 피로 없는 기후 교실",
+    },
+    excerpt: {
+      en: "How educators can use data tools and local projects so students act, not only absorb dread.",
+      zh: "教育者如何用数据工具与本地项目，让学生行动起来，而不只是吸收恐惧。",
+      ko: "데이터 도구와 지역 프로젝트로 학생이 공포만 흡수하지 않고 행동하게 하는 법.",
+    },
+  },
+  {
+    id: "multilingual-tutors",
+    href: "multilingual-tutors.html",
+    date: "2026-05-19",
+    minutes: 6,
+    topics: ["ai", "edu"],
+    title: {
+      en: "Multilingual Tutors, Shared Futures",
+      zh: "多语言助教，共同未来",
+      ko: "다국어 튜터, 공유된 미래",
+    },
+    excerpt: {
+      en: "Language models can widen access — if we design them for equity across Chinese, English, and Korean learners.",
+      zh: "语言模型可以拓宽通道——若我们为中英韩学习者的公平而设计。",
+      ko: "언어 모델은 접근을 넓힐 수 있습니다 — 중·영·한 학습자의 형평을 위해 설계한다면.",
+    },
+  },
+];

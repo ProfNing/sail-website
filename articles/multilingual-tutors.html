@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multilingual Tutors</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%232f7a45' d='M16.2 4v16h9L16.2 4z'/%3E%3Cpath fill='%231f6f8b' d='M15.8 7v13H7L15.8 7z'/%3E%3Cpath stroke='%23101c17' stroke-width='1.6' d='M16 4v17'/%3E%3Cpath fill='%230c1914' d='M5 22.5h22l-2.2 3.5H7.2z'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="brand">
+        <a class="brand__logo" href="../index.html" aria-label="Home"><svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#2f7a45" d="M12.2 3.2v12.2H19L12.2 3.2z"/>
+          <path fill="#1f6f8b" d="M11.8 5.5v9.9H5.2L11.8 5.5z"/>
+          <path stroke="#101c17" stroke-width="1.4" stroke-linecap="round" d="M12 3.2v13.3"/>
+          <path fill="#0c1914" d="M3.2 17.2h17.6l-1.8 2.8H5z"/>
+          <path fill="none" stroke="#1f6f8b" stroke-width="1.2" stroke-linecap="round" d="M3.5 20.6c2.8-.9 5.6-.9 8.5 0s5.7.9 8.5 0"/>
+        </svg></a>
+        <a class="brand__sail" href="../index.html?lang=en" lang="en">SAIL</a>
+        <a class="brand__qi" href="../index.html?lang=zh" lang="zh-Hans">启航</a>
+        <a class="brand__ko" href="../index.html?lang=ko" lang="ko">출항</a>
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" data-i18n-aria="nav.menu" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html" data-i18n="nav.home">Home</a>
+        <a href="index.html" data-i18n="nav.articles">Articles</a>
+        <a href="../topics/ai.html" data-i18n="nav.ai">AI</a>
+        <a href="../topics/sustainability.html" data-i18n="nav.sustainability">Sustainability</a>
+        <a href="../topics/education.html" data-i18n="nav.education">Learning</a>
+        <a href="../about.html" data-i18n="nav.about">About</a>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang="zh">中文</button>
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="ko">한국어</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap article-layout">
+    <article>
+      <header class="article-header">
+        <p class="eyebrow"><a href="index.html" data-i18n="common.backArticles">← All articles</a></p>
+
+        <div data-lang-panel="en">
+          <h1 class="display">Multilingual Tutors, Shared Futures</h1>
+          <p class="dek">Language models can widen access — if we design them for equity across Chinese, English, and Korean learners.</p>
+        </div>
+        <div data-lang-panel="zh" hidden>
+          <h1 class="display">多语言助教，共同未来</h1>
+          <p class="dek">语言模型可以拓宽通道——若我们为中英韩学习者的公平而设计。</p>
+        </div>
+        <div data-lang-panel="ko" hidden>
+          <h1 class="display">다국어 튜터, 공유된 미래</h1>
+          <p class="dek">언어 모델은 접근을 넓힐 수 있습니다 — 중·영·한 학습자의 형평을 위해 설계한다면.</p>
+        </div>
+
+        <div class="article-meta">
+          <span>2026-05-19</span>
+          <span>6 <span data-i18n="common.minRead">min read</span></span>
+          <span class="tags">
+            <span class="tag tag--ai">AI</span>
+            <span class="tag tag--edu">Learning</span>
+          </span>
+        </div>
+      </header>
+
+      <div class="prose" data-lang-panel="en">
+        <p>A tutor that only shines in English quietly redraws the map of opportunity. Multilingual AI for learning is not a translation feature bolted on at the end. It is a design choice about whose questions feel natural, whose examples feel local, and whose mistakes get patient feedback.</p>
+        <p>Chinese, English, and Korean sit in different writing systems and school cultures. A shared future means models evaluated on all three — for reasoning, for tone, for cultural fit — and teachers trained to spot fluent nonsense in any of them.</p>
+        <blockquote>Access without quality is just a wider door to confusion.</blockquote>
+        <h2>What to build next</h2>
+        <p>Prefer small, inspectable tutors for a course over opaque giants. Keep human teachers in the loop for assessment. Publish evaluation sets in all three languages. And remember sustainability: every always-on chatbot has a meter running — design for intermittent, purposeful use.</p>
+        <p>When AI, education, and planetary limits share one brief, multilingual tutors stop being a novelty and become infrastructure.</p>
+      </div>
+
+      <div class="prose" data-lang-panel="zh" hidden>
+        <p>只在英文里出色的助教，会悄悄改写机会的地图。面向学习的多语言人工智能，不是最后螺栓上去的翻译功能，而是关于谁的问题显得自然、谁的例子显得本地、谁的错误能得到耐心反馈的设计选择。</p>
+        <p>中文、英文与韩文处于不同的书写系统与学校文化。共同未来意味着模型在三种语言上都接受评估——推理、语气、文化契合——而教师也受训能在其中任一种语言里识破流畅的胡话。</p>
+        <blockquote>没有质量的通道，只是通往困惑的更宽的门。</blockquote>
+        <h2>下一步建造什么</h2>
+        <p>为一门课优先选择小而可检查的助教，而非不透明的巨兽。让真人教师留在评价回路里。用三种语言发布评测集。并记住可持续：永远在线的聊天机器人都有电表在转——为间歇、有目的的使用而设计。</p>
+        <p>当人工智能、教育与行星边界共用一份简报，多语言助教就不再是新鲜玩意，而成为基础设施。</p>
+      </div>
+
+      <div class="prose" data-lang-panel="ko" hidden>
+        <p>영어에서만 빛나는 튜터는 기회의 지도를 조용히 다시 그립니다. 학습용 다국어 AI는 끝에 덧붙인 번역 기능이 아닙니다. 누구의 질문이 자연스럽고, 누구의 예시가 지역적이며, 누구의 실수에 인내심 있는 피드백이 가는지에 대한 설계 선택입니다.</p>
+        <p>중국어, 영어, 한국어는 다른 문자 체계와 학교 문화에 놓여 있습니다. 공유된 미래는 세 언어 모두에서 — 추론, 어조, 문화적 적합 — 평가받는 모델과, 그중 어떤 언어에서든 유창한 넌센스를 알아채도록 훈련된 교사를 뜻합니다.</p>
+        <blockquote>질 없는 접근은 혼란으로 가는 더 넓은 문일 뿐입니다.</blockquote>
+        <h2>다음에 무엇을 만들 것인가</h2>
+        <p>불투명한 거대 모델보다 한 과목용으로 작고 점검 가능한 튜터를 우선하십시오. 평가에는 사람 교사를 남기십시오. 세 언어로 평가 세트를 공개하십시오. 그리고 지속가능성을 기억하십시오: 항상 켜진 챗봇마다 계량기가 돌아갑니다 — 간헐적이고 목적 있는 사용을 위해 설계하십시오.</p>
+        <p>AI, 교육, 지구의 한계가 하나의 브리프를 나눌 때, 다국어 튜터는 신기함이 아니라 인프라가 됩니다.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <a class="brand brand--footer" href="../index.html" aria-label="SAIL 启航 출항">
+          <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#2f7a45" d="M12.2 3.2v12.2H19L12.2 3.2z"/>
+          <path fill="#1f6f8b" d="M11.8 5.5v9.9H5.2L11.8 5.5z"/>
+          <path stroke="#101c17" stroke-width="1.4" stroke-linecap="round" d="M12 3.2v13.3"/>
+          <path fill="#0c1914" d="M3.2 17.2h17.6l-1.8 2.8H5z"/>
+          <path fill="none" stroke="#1f6f8b" stroke-width="1.2" stroke-linecap="round" d="M3.5 20.6c2.8-.9 5.6-.9 8.5 0s5.7.9 8.5 0"/>
+        </svg>
+        </a>
+        <p data-i18n="meta.tagline">Sustainability · AI · Learning</p>
+        </div>
+      <nav class="footer-nav">
+        <a href="index.html" data-i18n="nav.articles">Articles</a>
+        <a href="../about.html" data-i18n="nav.about">About</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

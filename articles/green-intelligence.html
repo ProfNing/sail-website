@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Green Intelligence</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%232f7a45' d='M16.2 4v16h9L16.2 4z'/%3E%3Cpath fill='%231f6f8b' d='M15.8 7v13H7L15.8 7z'/%3E%3Cpath stroke='%23101c17' stroke-width='1.6' d='M16 4v17'/%3E%3Cpath fill='%230c1914' d='M5 22.5h22l-2.2 3.5H7.2z'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="brand">
+        <a class="brand__logo" href="../index.html" aria-label="Home"><svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#2f7a45" d="M12.2 3.2v12.2H19L12.2 3.2z"/>
+          <path fill="#1f6f8b" d="M11.8 5.5v9.9H5.2L11.8 5.5z"/>
+          <path stroke="#101c17" stroke-width="1.4" stroke-linecap="round" d="M12 3.2v13.3"/>
+          <path fill="#0c1914" d="M3.2 17.2h17.6l-1.8 2.8H5z"/>
+          <path fill="none" stroke="#1f6f8b" stroke-width="1.2" stroke-linecap="round" d="M3.5 20.6c2.8-.9 5.6-.9 8.5 0s5.7.9 8.5 0"/>
+        </svg></a>
+        <a class="brand__sail" href="../index.html?lang=en" lang="en">SAIL</a>
+        <a class="brand__qi" href="../index.html?lang=zh" lang="zh-Hans">启航</a>
+        <a class="brand__ko" href="../index.html?lang=ko" lang="ko">출항</a>
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" data-i18n-aria="nav.menu" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html" data-i18n="nav.home">Home</a>
+        <a href="index.html" data-i18n="nav.articles">Articles</a>
+        <a href="../topics/ai.html" data-i18n="nav.ai">AI</a>
+        <a href="../topics/sustainability.html" data-i18n="nav.sustainability">Sustainability</a>
+        <a href="../topics/education.html" data-i18n="nav.education">Learning</a>
+        <a href="../about.html" data-i18n="nav.about">About</a>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-lang="zh">中文</button>
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="ko">한국어</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap article-layout">
+    <article>
+      <header class="article-header">
+        <p class="eyebrow"><a href="index.html" data-i18n="common.backArticles">← All articles</a></p>
+
+        <div data-lang-panel="en">
+          <h1 class="display">Green Intelligence: Teaching Models to Cost Less Earth</h1>
+          <p class="dek">AI’s carbon and water footprint is a curriculum problem as much as an engineering one.</p>
+        </div>
+        <div data-lang-panel="zh" hidden>
+          <h1 class="display">绿色智能：让模型少消耗一点地球</h1>
+          <p class="dek">人工智能的碳与水足迹，既是工程问题，也是课程问题。</p>
+        </div>
+        <div data-lang-panel="ko" hidden>
+          <h1 class="display">녹색 지능: 지구를 덜 쓰도록 모델을 가르치기</h1>
+          <p class="dek">AI의 탄소·물 발자국은 공학 문제인 동시에 교육과정 문제입니다.</p>
+        </div>
+
+        <div class="article-meta">
+          <span>2026-07-12</span>
+          <span>8 <span data-i18n="common.minRead">min read</span></span>
+          <span class="tags">
+            <span class="tag tag--ai">AI</span>
+            <span class="tag tag--sus">Sustainability</span>
+            <span class="tag tag--edu">Learning</span>
+          </span>
+        </div>
+      </header>
+
+      <div class="prose" data-lang-panel="en">
+        <p>Every large model we train is a wager on energy, water, and rare minerals. The industry often frames this as an optimization race: better chips, smarter sparsity, greener data centers. Those matter. They are not enough.</p>
+        <p>What we rarely teach — in computer science, in MBA programs, in public policy schools — is how to <em>refuse</em> unnecessary scale. Green intelligence begins when students learn to ask: Does this task need a frontier model? Can retrieval replace another training run? Who pays the environmental cost when the demo looks free?</p>
+        <blockquote>Efficiency without judgment still expands demand. Literacy is the missing throttle.</blockquote>
+        <h2>Three classrooms, one syllabus</h2>
+        <p>In an AI course, assign a carbon estimate beside every accuracy metric. In a sustainability program, treat model cards as environmental disclosures. In teacher education, practice explaining trade-offs to non-specialists in their language — Chinese, English, Korean — so climate cost does not stay trapped in English-language papers.</p>
+        <p>The weave is practical: engineers who can measure impact, educators who can translate it, and sustainability practitioners who can audit digital infrastructure the way they audit buildings.</p>
+        <h2>A quieter ambition</h2>
+        <p>Green intelligence is not anti-AI. It is pro-proportion. The models worth keeping are the ones we can afford — ecologically and socially — to run in the open, teach in schools, and govern in public.</p>
+      </div>
+
+      <div class="prose" data-lang-panel="zh" hidden>
+        <p>我们训练的每一个大模型，都是对能源、水与稀有矿物的一次下注。业界常把它说成优化竞赛：更好的芯片、更聪明的稀疏、更绿的数据中心。这些重要，但不够。</p>
+        <p>我们很少教的是——在计算机、商学院、公共政策课堂里——如何<strong>拒绝</strong>不必要的规模。「绿色智能」始于学生学会提问：这件事需要前沿模型吗？检索能否代替又一次训练？演示看似免费时，环境成本由谁承担？</p>
+        <blockquote>没有判断力的效率，仍会扩大需求。素养，是缺失的节流阀。</blockquote>
+        <h2>三间教室，同一份大纲</h2>
+        <p>在人工智能课上，让碳估算与准确率并列。在可持续项目中，把模型卡当作环境披露。在师范教育里，练习用中文、英文、韩文向非专业者解释权衡，使气候成本不再困在英文论文里。</p>
+        <p>交织是务实的：能度量影响的工程师，能转译影响的教育者，以及能像审计建筑一样审计数字基础设施的可持续实践者。</p>
+        <h2>更安静的野心</h2>
+        <p>绿色智能并非反人工智能，而是主张分寸。值得留下的模型，是我们在生态与社会上负担得起——能公开运行、能在学校里教、能被公共治理的那些。</p>
+      </div>
+
+      <div class="prose" data-lang-panel="ko" hidden>
+        <p>우리가 훈련하는 모든 대규모 모델은 에너지, 물, 희귀 광물에 대한 내기입니다. 업계는 이를 최적화 경쟁으로 자주 말합니다: 더 나은 칩, 더 똑똑한 희소성, 더 푸른 데이터센터. 중요하지만 충분하지 않습니다.</p>
+        <p>우리가 거의 가르치지 않는 것은 — 컴퓨터과학, MBA, 공공정책 교실에서 — 불필요한 규모를 <strong>거절</strong>하는 법입니다. 녹색 지능은 학생이 이렇게 묻기 시작할 때 시작됩니다: 이 과제에 최전선 모델이 필요한가? 검색이 또 한 번의 훈련을 대체할 수 있는가? 데모가 무료처럼 보일 때, 환경 비용은 누가 치르는가?</p>
+        <blockquote>판단 없는 효율은 여전히 수요를 키웁니다. 문해력이 빠진 스로틀입니다.</blockquote>
+        <h2>세 교실, 하나의 교육과정</h2>
+        <p>AI 수업에서는 정확도 옆에 탄소 추정치를 두십시오. 지속가능성 프로그램에서는 모델 카드를 환경 공시로 다루십시오. 교사 교육에서는 중국어·영어·한국어로 비전문가에게 트레이드오프를 설명하는 연습을 해, 기후 비용이 영어 논문에만 갇히지 않게 하십시오.</p>
+        <p>엮음은 실용적입니다: 영향을 측정할 수 있는 엔지니어, 번역할 수 있는 교육자, 건물을 감사하듯 디지털 인프라를 감사할 수 있는 지속가능성 실무자.</p>
+        <h2>더 조용한 야심</h2>
+        <p>녹색 지능은 반-AI가 아닙니다. 비례를 옹호합니다. 남길 가치가 있는 모델은 생태적으로·사회적으로 감당할 수 있는 — 공개적으로 돌리고, 학교에서 가르치고, 공공에서 다스릴 수 있는 — 것들입니다.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <a class="brand brand--footer" href="../index.html" aria-label="SAIL 启航 출항">
+          <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#2f7a45" d="M12.2 3.2v12.2H19L12.2 3.2z"/>
+          <path fill="#1f6f8b" d="M11.8 5.5v9.9H5.2L11.8 5.5z"/>
+          <path stroke="#101c17" stroke-width="1.4" stroke-linecap="round" d="M12 3.2v13.3"/>
+          <path fill="#0c1914" d="M3.2 17.2h17.6l-1.8 2.8H5z"/>
+          <path fill="none" stroke="#1f6f8b" stroke-width="1.2" stroke-linecap="round" d="M3.5 20.6c2.8-.9 5.6-.9 8.5 0s5.7.9 8.5 0"/>
+        </svg>
+        </a>
+        <p data-i18n="meta.tagline">Sustainability · AI · Learning</p>
+        </div>
+      <nav class="footer-nav">
+        <a href="index.html" data-i18n="nav.articles">Articles</a>
+        <a href="../about.html" data-i18n="nav.about">About</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
