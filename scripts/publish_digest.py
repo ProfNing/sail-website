@@ -445,12 +445,14 @@ def upsert_catalog(day: date, titles: dict, excerpts: dict) -> None:
     marker = "window.WEAVE_ARTICLES = ["
     if marker not in src:
         raise SystemExit("WEAVE_ARTICLES not found")
-    src = re.sub(
-        rf"\s*\{{\s*id:\s*{re.escape(js_str(slug))}[\s\S]*?\}}\s*,?",
-        "\n",
-        src,
-        count=1,
+
+    # Remove existing entry for this slug (match full object by id, not first '}')
+    id_pat = re.compile(
+        rf"\s*\{{\s*id:\s*{re.escape(js_str(slug))},[\s\S]*?\n  \}},?",
+        re.MULTILINE,
     )
+    src = id_pat.sub("\n", src, count=1)
+
     insert_at = src.index(marker) + len(marker)
     src = src[:insert_at] + "\n" + entry + "," + src[insert_at:]
     I18N.write_text(src, encoding="utf-8")
