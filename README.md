@@ -13,6 +13,17 @@ python3 -m http.server 8080
 
 Open http://localhost:8080
 
+## Private visitor stats (you only)
+
+The public site does **not** show visitor numbers. Stats go to [GoatCounter](https://www.goatcounter.com) (privacy-friendly, free for personal use).
+
+1. Sign up at https://www.goatcounter.com
+2. Create a site with code **`sail-website`** (must match `SAIL_GOATCOUNTER` in `js/main.js`)
+3. In settings, set **Dashboard viewable by** → **logged in users only**
+4. View daily visitors at https://sail-website.goatcounter.com while signed in
+
+Localhost previews are not counted.
+
 ## Private collection (local only)
 
 Headlines are collected for **you only**. `js/collected.js` is gitignored and is **not** published to GitHub Pages.

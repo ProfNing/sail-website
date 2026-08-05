@@ -246,10 +246,30 @@
     });
   }
 
+  /**
+   * Private visitor stats via GoatCounter (dashboard only — not shown on the site).
+   * Create a free site at https://www.goatcounter.com with this code, and set
+   * “Dashboard viewable by” to logged-in users only.
+   */
+  const SAIL_GOATCOUNTER = "sail-website";
+
+  function initAnalytics() {
+    if (!SAIL_GOATCOUNTER) return;
+    const host = location.hostname;
+    if (host === "localhost" || host === "127.0.0.1") return;
+
+    const s = document.createElement("script");
+    s.async = true;
+    s.dataset.goatcounter = `https://${SAIL_GOATCOUNTER}.goatcounter.com/count`;
+    s.src = "https://gc.zgo.at/count.js";
+    document.head.appendChild(s);
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initNav();
     setLang(detectLang());
     initReveal();
+    initAnalytics();
   });
 
   window.Weave = { setLang, t, getLang, topicLabel, formatDate };
