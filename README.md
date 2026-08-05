@@ -22,6 +22,8 @@ The public site does **not** show visitor numbers. Stats go to [GoatCounter](htt
 3. In settings, set **Dashboard viewable by** → **logged in users only**
 4. View daily visitors at https://sail-website.goatcounter.com while signed in
 
+Shortcut on the site (not in the public menu): https://profning.github.io/sail-website/stats/
+
 Localhost previews are not counted.
 
 ## Private collection (local only)
