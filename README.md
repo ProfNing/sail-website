@@ -20,6 +20,8 @@ Headlines are collected for **you only**. `js/collected.js` is gitignored and is
 Feeds (edit `feeds.json`):
 - **AI news** — MIT News, TechCrunch, The Verge
 - **Learning** — AI education, MIS education, AI in business schools (Google News queries), Campus Technology, TechCrunch EdTech, Poets&Quants, MIT Sloan Review, MIS Quarterly
+- **AI × Sustainability** — Google News (AI for sustainability / green AI / climate tech), TechCrunch Climate
+- **Stanford Doerr School of Sustainability** — Google News coverage of the school
 
 ```bash
 python3 scripts/collect_feeds.py
@@ -27,6 +29,16 @@ python3 -m http.server 8080
 ```
 
 Then open http://localhost:8080/collected/ — not linked from the public site.
+
+## Public daily digest (no API key)
+
+Publishes a trilingual extractive roundup to `articles/digest-YYYY-MM-DD.html` and the articles catalog. Uses free Google Translate (gtx) — no API key.
+
+```bash
+python3 scripts/publish_digest.py
+```
+
+GitHub Action (`.github/workflows/daily-digest.yml`) runs this daily and commits only the public digest files — never `js/collected.js`.
 
 ## Write an article (Chinese → auto EN / KO)
 

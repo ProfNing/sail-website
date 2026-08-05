@@ -1,5 +1,5 @@
 {
-  "maxItems": 40,
+  "maxItems": 48,
   "perFeed": 6,
   "feeds": [
     {
@@ -67,6 +67,24 @@
       "name": "MIS Quarterly",
       "url": "https://aisel.aisnet.org/misq/recent.rss",
       "topics": ["edu"]
+    },
+    {
+      "id": "gnews-ai-sus",
+      "name": "Google News — AI for Sustainability",
+      "url": "https://news.google.com/rss/search?q=AI+sustainability+OR+%22artificial+intelligence%22+climate+OR+%22green+AI%22+OR+%22climate+tech%22&hl=en-US&gl=US&ceid=US:en",
+      "topics": ["ai", "sus"]
+    },
+    {
+      "id": "gnews-stanford-doerr",
+      "name": "Google News — Stanford Doerr School of Sustainability",
+      "url": "https://news.google.com/rss/search?q=%22Stanford+Doerr%22+OR+%22Doerr+School+of+Sustainability%22+OR+site:sustainability.stanford.edu&hl=en-US&gl=US&ceid=US:en",
+      "topics": ["sus", "edu"]
+    },
+    {
+      "id": "techcrunch-climate",
+      "name": "TechCrunch — Climate",
+      "url": "https://techcrunch.com/tag/climate/feed/",
+      "topics": ["sus", "ai"]
     }
   ]
 }

@@ -234,9 +234,16 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -20px 0px" }
     );
-    nodes.forEach((n) => io.observe(n));
+    nodes.forEach((n) => {
+      const rect = n.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        n.classList.add("is-visible");
+      } else {
+        io.observe(n);
+      }
+    });
   }
 
   document.addEventListener("DOMContentLoaded", () => {

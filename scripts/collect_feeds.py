@@ -202,8 +202,28 @@ def collect() -> list[dict]:
                 }
             )
 
-    collected.sort(key=lambda x: x["date"], reverse=True)
-    return collected[:max_items]
+    # Keep a fair mix across sources (don't let one feed's fresh dates wipe others)
+    by_source: dict[str, list[dict]] = {}
+    for item in collected:
+        by_source.setdefault(item["source"], []).append(item)
+    for bucket in by_source.values():
+        bucket.sort(key=lambda x: x["date"], reverse=True)
+
+    merged: list[dict] = []
+    while len(merged) < max_items and any(by_source.values()):
+        for source in list(by_source.keys()):
+            bucket = by_source.get(source) or []
+            if not bucket:
+                by_source.pop(source, None)
+                continue
+            merged.append(bucket.pop(0))
+            if not bucket:
+                by_source.pop(source, None)
+            if len(merged) >= max_items:
+                break
+
+    merged.sort(key=lambda x: x["date"], reverse=True)
+    return merged
 
 
 def write_js(items: list[dict]) -> None:

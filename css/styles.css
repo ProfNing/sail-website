@@ -625,6 +625,7 @@ body.lang-ko {
   font-weight: 600;
   margin: 0 0 0.35rem;
   line-height: 1.25;
+  color: var(--ink);
 }
 
 .article-item p {
