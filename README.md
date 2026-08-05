@@ -53,6 +53,15 @@ python3 scripts/publish_digest.py
 
 GitHub Action (`.github/workflows/daily-digest.yml`) runs this daily and commits only the public digest files — never `js/collected.js`.
 
+### Private 小红书 draft (local only)
+
+When you run `publish_digest.py` **on your machine**, it also writes a Chinese note ready to paste into 小红书:
+
+- `private/xiaohongshu/latest.md`
+- `private/xiaohongshu/digest-YYYY-MM-DD.md`
+
+These files are gitignored and are **not** on the public site. Open `latest.md`, copy 标题 + 正文 into the app. GitHub Actions skips this step.
+
 ## Write an article (Chinese → auto EN / KO)
 
 1. Copy the sample draft and edit in Chinese:

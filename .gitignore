@@ -6,3 +6,6 @@ venv/
 .env
 # Private collected headlines — local only, never publish
 js/collected.js
+# Private 小红书 drafts — local only, never publish
+private/xiaohongshu/digest-*.md
+private/xiaohongshu/latest.md

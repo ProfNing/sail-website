@@ -5,6 +5,7 @@ Build a public daily digest from collected feeds (no AI API key).
 - Collects RSS headlines
 - Writes an extractive summary article in EN / 中文 / 한국어
 - Registers it in js/i18n.js
+- Locally: also writes a private 小红书 Chinese draft (gitignored)
 
 Usage:
   python3 scripts/publish_digest.py
@@ -16,6 +17,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import os
 import re
 import sys
 import time
@@ -28,6 +30,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ARTICLES = ROOT / "articles"
 I18N = ROOT / "js" / "i18n.js"
+XHS_DIR = ROOT / "private" / "xiaohongshu"
+SITE_DIGEST_BASE = "https://profning.github.io/sail-website/articles"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from collect_feeds import collect, write_js  # noqa: E402
@@ -346,6 +350,77 @@ def js_str(s: str) -> str:
     return json.dumps(s, ensure_ascii=False)
 
 
+def write_xiaohongshu_draft(
+    day: date,
+    items: list[dict],
+    translated: dict[tuple[str, str], str],
+) -> Path | None:
+    """
+    Private Chinese note for 小红书 — local files only (gitignored).
+    Not published to the website or committed by the daily Action.
+    """
+    if os.environ.get("GITHUB_ACTIONS"):
+        print("Skipping 小红书 draft on GitHub Actions (private / local only)")
+        return None
+
+    XHS_DIR.mkdir(parents=True, exist_ok=True)
+    when = format_when(day, "zh")
+    L = LABELS["zh"]
+    c = counts(items)
+    title = f"SAIL今日简报｜{when}"
+    if len(title) > 20:
+        title = f"今日简报 {day.month}/{day.day}｜AI·可持续·学习"
+
+    lines: list[str] = [
+        f"【SAIL 启航】{when} 公开信息源速览",
+        "",
+        f"今天整理了 {len(items)} 条：人工智能 {c['ai']} · 可持续 {c['sus']} · 学习 {c['edu']}",
+        "",
+    ]
+
+    buckets: dict[str, list[dict]] = defaultdict(list)
+    for item in items:
+        buckets[bucket_for(item)].append(item)
+
+    per_section = 3
+    for key in SECTION_ORDER:
+        group = buckets.get(key) or []
+        if not group:
+            continue
+        lines.append(f"【{L[key]}】")
+        for item in group[:per_section]:
+            t_zh = translated.get((item["title"], "zh"), item["title"])
+            source = item.get("source") or ""
+            lines.append(f"· {t_zh}")
+            if source:
+                lines.append(f"  （{source}）")
+        lines.append("")
+
+    lines.extend(
+        [
+            "完整中英韩简报（网站）：",
+            f"{SITE_DIGEST_BASE}/digest-{day.isoformat()}.html",
+            "",
+            "#SAIL启航 #人工智能 #可持续 #学习 #每日简报 #AI教育",
+        ]
+    )
+
+    body = "\n".join(lines).rstrip() + "\n"
+    note = (
+        f"# 小红书草稿（私密 · 勿公开到网站）\n"
+        f"# 生成时间：{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}\n"
+        f"# 用法：复制下面「标题」和「正文」到小红书 App 发布\n\n"
+        f"## 标题\n\n{title}\n\n"
+        f"## 正文\n\n{body}"
+    )
+
+    dated = XHS_DIR / f"digest-{day.isoformat()}.md"
+    latest = XHS_DIR / "latest.md"
+    dated.write_text(note, encoding="utf-8")
+    latest.write_text(note, encoding="utf-8")
+    return dated
+
+
 def upsert_catalog(day: date, titles: dict, excerpts: dict) -> None:
     slug = f"digest-{day.isoformat()}"
     entry = f"""  {{
@@ -440,6 +515,10 @@ def main() -> None:
     upsert_catalog(day, titles, excerpts)
     print(f"Wrote {out.relative_to(ROOT)}")
     print(f"Updated {I18N.relative_to(ROOT)}")
+
+    xhs = write_xiaohongshu_draft(day, items, translated)
+    if xhs:
+        print(f"Wrote private 小红书 draft {xhs.relative_to(ROOT)} (+ latest.md)")
 
 
 if __name__ == "__main__":
