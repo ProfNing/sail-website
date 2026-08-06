@@ -159,21 +159,111 @@ def format_when(d: date, lang: str) -> str:
     return d.strftime("%B %d, %Y").replace(" 0", " ")
 
 
-def select_for_digest(items: list[dict], per_section: int = 5) -> list[dict]:
-    """Pick a fair mix per topic bucket for the public digest."""
+def normalize_title(title: str) -> str:
+    t = (title or "").lower().strip()
+    t = re.sub(r"&amp;", "&", t)
+    t = re.sub(r"\s+", " ", t)
+    # Drop common site suffixes after em dash / hyphen
+    t = re.split(r"\s+[—\-–|]\s+", t, maxsplit=1)[0]
+    return t
+
+
+def titles_too_similar(a: str, b: str) -> bool:
+    """Catch near-duplicates with different URLs (same story, different outlets)."""
+    if not a or not b:
+        return False
+    if a == b:
+        return True
+    shorter, longer = (a, b) if len(a) <= len(b) else (b, a)
+    if len(shorter) >= 24 and shorter in longer:
+        return True
+    wa, wb = set(shorter.split()), set(longer.split())
+    if len(wa) >= 5 and len(wa & wb) / len(wa) >= 0.75:
+        return True
+    return False
+
+
+def urls_from_digest_html(path: Path) -> tuple[set[str], set[str]]:
+    """Return (urls, normalized titles) from a published digest page."""
+    html_src = path.read_text(encoding="utf-8")
+    # Prefer English panel so titles match source language for dedupe
+    m = re.search(
+        r'data-lang-panel="en">(.*?)</div>\s*<div class="prose" data-lang-panel="zh"',
+        html_src,
+        re.S,
+    )
+    block = m.group(1) if m else html_src
+    pairs = re.findall(
+        r'<a href="([^"]+)"[^>]*>\s*<strong>(.*?)</strong>',
+        block,
+        re.S,
+    )
+    urls: set[str] = set()
+    titles: set[str] = set()
+    for url, title in pairs:
+        urls.add(url.strip())
+        titles.add(normalize_title(re.sub(r"\s+", " ", title)))
+    return urls, titles
+
+
+def previously_published(exclude_date: date | None = None) -> tuple[set[str], set[str]]:
+    """URLs/titles already used in other digest-*.html articles."""
+    urls: set[str] = set()
+    titles: set[str] = set()
+    for path in sorted(ARTICLES.glob("digest-*.html")):
+        stamp = path.stem.removeprefix("digest-")
+        if exclude_date and stamp == exclude_date.isoformat():
+            continue
+        try:
+            u, t = urls_from_digest_html(path)
+        except Exception as exc:
+            print(f"warn: could not read {path.name}: {exc}", file=sys.stderr)
+            continue
+        urls |= u
+        titles |= t
+    return urls, titles
+
+
+def select_for_digest(
+    items: list[dict],
+    per_section: int = 5,
+    *,
+    exclude_urls: set[str] | None = None,
+    exclude_titles: set[str] | None = None,
+) -> list[dict]:
+    """Pick a fair mix per topic bucket; skip items already in earlier digests."""
+    exclude_urls = exclude_urls or set()
+    exclude_titles = exclude_titles or set()
     buckets: dict[str, list[dict]] = defaultdict(list)
     for item in items:
         buckets[bucket_for(item)].append(item)
     chosen: list[dict] = []
     seen_urls: set[str] = set()
+    seen_titles: set[str] = set()
+    skipped = 0
     for key in SECTION_ORDER:
         for item in buckets.get(key) or []:
-            if item["url"] in seen_urls:
+            url = item.get("url") or ""
+            title_key = normalize_title(item.get("title") or "")
+            if url in exclude_urls or url in seen_urls:
+                skipped += 1
+                continue
+            if title_key and (
+                title_key in exclude_titles
+                or title_key in seen_titles
+                or any(titles_too_similar(title_key, prev) for prev in seen_titles)
+                or any(titles_too_similar(title_key, prev) for prev in exclude_titles)
+            ):
+                skipped += 1
                 continue
             chosen.append(item)
-            seen_urls.add(item["url"])
+            seen_urls.add(url)
+            if title_key:
+                seen_titles.add(title_key)
             if sum(1 for x in chosen if bucket_for(x) == key) >= per_section:
                 break
+    if skipped:
+        print(f"Skipped {skipped} headlines already used in earlier digests")
     return chosen
 
 
@@ -477,7 +567,14 @@ def main() -> None:
         write_js(items)
 
     items = sorted(items, key=lambda x: x.get("date", ""), reverse=True)
-    digest_items = select_for_digest(items)
+    used_urls, used_titles = previously_published(exclude_date=day)
+    if used_urls or used_titles:
+        print(f"Excluding {len(used_urls)} URLs / {len(used_titles)} titles from earlier digests")
+    digest_items = select_for_digest(
+        items,
+        exclude_urls=used_urls,
+        exclude_titles=used_titles,
+    )
 
     print(f"Digest will include {len(digest_items)} headlines")
     print("Translating headlines (free Google gtx, no API key)…")
