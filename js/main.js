@@ -18,9 +18,11 @@
   }
 
   function getLang() {
-    return document.documentElement.lang && SUPPORTED.includes(document.documentElement.lang)
-      ? document.documentElement.lang
-      : detectLang();
+    const raw = (document.documentElement.lang || "").toLowerCase();
+    if (raw.startsWith("zh")) return "zh";
+    if (raw.startsWith("ko")) return "ko";
+    if (SUPPORTED.includes(raw)) return raw;
+    return detectLang();
   }
 
   function t(path, lang) {
