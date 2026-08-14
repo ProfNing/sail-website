@@ -223,9 +223,7 @@ def render_article(meta: dict, zh_blocks, en_blocks, ko_blocks, titles, excerpts
       <nav class="nav" aria-label="Primary">
         <a href="../index.html" data-i18n="nav.home">Home</a>
         <a href="index.html" data-i18n="nav.articles">Articles</a>
-        <a href="../topics/ai.html" data-i18n="nav.ai">AI</a>
-        <a href="../topics/sustainability.html" data-i18n="nav.sustainability">Sustainability</a>
-        <a href="../topics/education.html" data-i18n="nav.education">Learning</a>
+        <a href="../learn/index.html" data-i18n="nav.practice">Practice</a>
         <a href="../about.html" data-i18n="nav.about">About</a>
         <div class="lang-switch" role="group" aria-label="Language">
           <button type="button" data-lang="zh">中文</button>
@@ -293,6 +291,7 @@ def render_article(meta: dict, zh_blocks, en_blocks, ko_blocks, titles, excerpts
       </div>
       <nav class="footer-nav">
         <a href="index.html" data-i18n="nav.articles">Articles</a>
+        <a href="../learn/index.html" data-i18n="nav.practice">Practice</a>
         <a href="../about.html" data-i18n="nav.about">About</a>
       </nav>
     </div>

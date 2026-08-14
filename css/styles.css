@@ -943,6 +943,36 @@ body.lang-ko {
   margin: 0;
 }
 
+.topic-subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.35rem;
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+}
+
+.topic-subnav a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.1rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.topic-subnav a:hover {
+  color: var(--ink);
+}
+
+.topic-subnav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: currentColor;
+}
+
+.topic-hero .topic-subnav {
+  margin-top: 1.25rem;
+}
+
 /* —— Learn / practice —— */
 .learn-title {
   font-size: clamp(1.85rem, 4.5vw, 2.75rem);

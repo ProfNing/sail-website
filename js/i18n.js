@@ -62,6 +62,8 @@ window.WEAVE_I18N = {
     },
     articlesPage: {
       title: "Articles",
+      all: "All",
+      topics: "Topics",
     },
     about: {
       title: "About",
@@ -158,6 +160,8 @@ window.WEAVE_I18N = {
     },
     articlesPage: {
       title: "文章",
+      all: "全部",
+      topics: "主题",
     },
     about: {
       title: "关于",
@@ -254,6 +258,8 @@ window.WEAVE_I18N = {
     },
     articlesPage: {
       title: "글",
+      all: "전체",
+      topics: "주제",
     },
     about: {
       title: "소개",
