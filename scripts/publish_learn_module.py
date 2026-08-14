@@ -85,6 +85,7 @@ def build_module(day: date, headlines: list[str]) -> dict:
                     trilang("Ignore education and sustainability angles entirely."),
                 ],
                 "answer": 0,
+                "track": "ai-literacy",
                 "explain": trilang(
                     "SAIL practice trains judgment: stakes, evidence, and skill—not headline acceptance."
                 ),
@@ -103,6 +104,7 @@ def build_module(day: date, headlines: list[str]) -> dict:
                     trilang("Assume AI always improves learning outcomes."),
                 ],
                 "answer": 0,
+                "track": "ai-literacy",
                 "explain": trilang(
                     "Link news to practice: classroom use, evaluation, or sustainability stakes."
                 ),
@@ -117,7 +119,9 @@ def build_module(day: date, headlines: list[str]) -> dict:
         "id": day.isoformat(),
         "date": day.isoformat(),
         "minutes": 8,
+        "track": "ai-literacy",
         "digestHref": f"../articles/digest-{day.isoformat()}.html",
+        "href": f"week-{day.isoformat()}.html",
         "skills": ["evaluate", "classroom-use", "energy-society"],
         "sdgs": ["4", "13"],
         "title": title,
