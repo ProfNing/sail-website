@@ -104,7 +104,9 @@
         const title = textOf(m.title, lang);
         const excerpt = textOf(m.excerpt, lang);
         return `
-          <a class="article-item" href="module.html?id=${encodeURIComponent(m.id)}">
+        const href = m.href || ("week-" + encodeURIComponent(m.id) + ".html");
+        return `
+          <a class="article-item" href="${href}">
             <span class="article-item__meta">${date} · ${m.minutes || 8} ${t("learn.minutes", lang)}</span>
             <span>
               <h3>${title}</h3>

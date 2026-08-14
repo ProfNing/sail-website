@@ -5,6 +5,7 @@ window.WEAVE_LEARN_MODULES = [
     date: "2026-08-13",
     minutes: 8,
     digestHref: "../articles/digest-2026-08-13.html",
+    href: "week-2026-08-13.html",
     skills: ["classroom-use", "evaluate", "energy-society"],
     sdgs: ["4", "13"],
     title: {
