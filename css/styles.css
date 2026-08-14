@@ -942,3 +942,102 @@ body.lang-ko {
 .page-intro .lead {
   margin: 0;
 }
+
+/* —— Learn / practice —— */
+.learn-title {
+  font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+  margin: 0.35rem 0 0.75rem;
+}
+
+.learn-meta,
+.learn-digest {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.learn-block {
+  margin: 2.25rem 0;
+}
+
+.learn-block h2 {
+  font-family: var(--font-display, inherit);
+  font-size: 1.35rem;
+  margin: 0 0 1rem;
+}
+
+.learn-insights {
+  margin: 0;
+  padding-left: 1.2rem;
+  line-height: 1.55;
+}
+
+.learn-insights li {
+  margin-bottom: 0.75rem;
+}
+
+.learn-q {
+  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  padding: 1rem 1.1rem 1.1rem;
+  margin: 0 0 1rem;
+}
+
+.learn-q legend {
+  padding: 0 0.35rem;
+  font-weight: 600;
+}
+
+.learn-choice {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  margin: 0.55rem 0;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.learn-choice input {
+  margin-top: 0.25rem;
+}
+
+.learn-explain {
+  margin: 0.75rem 0 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft, var(--muted));
+}
+
+.learn-q.is-correct {
+  border-color: color-mix(in srgb, var(--sage, #2f7a45) 55%, transparent);
+}
+
+.learn-q.is-wrong {
+  border-color: color-mix(in srgb, #a33 45%, transparent);
+}
+
+.learn-score {
+  margin: 1rem 0 0;
+  font-weight: 600;
+}
+
+.learn-reflect {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0 0.85rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  background: color-mix(in srgb, var(--paper, #fff) 92%, var(--sage, #2f7a45));
+  font: inherit;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.learn-reflect-label {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.learn-reflect-status,
+.learn-empty {
+  color: var(--muted);
+}

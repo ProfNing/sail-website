@@ -53,6 +53,16 @@ python3 scripts/publish_digest.py
 
 GitHub Action (`.github/workflows/daily-digest.yml`) runs this daily and commits only the public digest files — never `js/collected.js`.
 
+### Weekly practice (`/learn`)
+
+Turn a digest into an AI-literacy module (3 insights · 5 questions · 1 ethics prompt):
+
+```bash
+python3 scripts/publish_learn_module.py --date 2026-08-13
+```
+
+Then edit `js/learn-modules.js` (draft quizzes are scaffolds) and open `/learn/`. Progress is stored in the browser only.
+
 ### Private 小红书 draft (local only)
 
 When you run `publish_digest.py` **on your machine**, it also writes a Chinese note ready to paste into 小红书:
