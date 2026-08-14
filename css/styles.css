@@ -995,27 +995,6 @@ body.lang-ko {
   margin: 0 0 1rem;
 }
 
-.learn-quiz-track {
-  font-family: var(--font-display, inherit);
-  font-size: 1.1rem;
-  margin: 1.5rem 0 0.85rem;
-  color: var(--ink);
-}
-
-.learn-resources {
-  margin: 0;
-  padding-left: 1.2rem;
-  line-height: 1.55;
-}
-
-.learn-resources li {
-  margin-bottom: 0.55rem;
-}
-
-.learn-resources a {
-  color: var(--ai);
-}
-
 .learn-insights {
   margin: 0;
   padding-left: 1.2rem;

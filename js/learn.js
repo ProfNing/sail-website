@@ -1,7 +1,6 @@
 (function () {
   const STORAGE = "sail-learn-progress";
   const SUPPORTED = ["en", "zh", "ko"];
-  const TRACKS = ["ai-literacy", "climate-resilience"];
 
   function t(path, lang) {
     return window.Weave ? window.Weave.t(path, lang) : path;
@@ -18,12 +17,6 @@
 
   function getLang() {
     return normalizeLang(window.Weave ? window.Weave.getLang() : "en");
-  }
-
-  function getTrackFilter() {
-    const q = new URLSearchParams(location.search).get("track");
-    if (TRACKS.includes(q)) return q;
-    return "all";
   }
 
   function loadProgress() {
@@ -60,43 +53,24 @@
         evaluate: "Evaluate claims",
         "energy-society": "Energy & society",
         understand: "Understand AI",
-        "create-with-care": "Create with care",
-        "risk-literacy": "Risk literacy",
-        "prepare-act": "Prepare & act",
-        "build-back-better": "Build Back Better",
+        create-with-care: "Create with care",
       },
       zh: {
         "classroom-use": "课堂使用",
         evaluate: "评估主张",
         "energy-society": "能源与社会",
         understand: "理解 AI",
-        "create-with-care": "审慎创造",
-        "risk-literacy": "风险素养",
-        "prepare-act": "备灾与行动",
-        "build-back-better": "重建得更好",
+        create-with-care: "审慎创造",
       },
       ko: {
         "classroom-use": "수업 활용",
         evaluate: "주장 평가",
         "energy-society": "에너지와 사회",
         understand: "AI 이해",
-        "create-with-care": "신중한 창작",
-        "risk-literacy": "위험 리터러시",
-        "prepare-act": "대비와 행동",
-        "build-back-better": "더 낫게 재건",
+        create-with-care: "신중한 창작",
       },
     };
     return (map[lang] && map[lang][skill]) || skill;
-  }
-
-  function trackLabel(track, lang) {
-    if (track === "ai-literacy") return t("learn.trackAi", lang);
-    if (track === "climate-resilience") return t("learn.trackClimate", lang);
-    return track || "";
-  }
-
-  function trackTagClass(track) {
-    return track === "climate-resilience" ? "tag--sus" : "tag--ai";
   }
 
   function textOf(obj, lang) {
@@ -105,24 +79,11 @@
     return obj[lang] || obj.en || obj.zh || obj.ko || "";
   }
 
-  function syncTrackNav(active) {
-    document.querySelectorAll("[data-learn-track]").forEach((el) => {
-      const track = el.getAttribute("data-learn-track");
-      if (track === active) el.setAttribute("aria-current", "page");
-      else el.removeAttribute("aria-current");
-    });
-  }
-
   function renderList(lang) {
     const root = document.querySelector("[data-learn-list]");
     if (!root) return;
     lang = normalizeLang(lang);
-    const filter = getTrackFilter();
-    syncTrackNav(filter);
-    const modules = (window.WEAVE_LEARN_MODULES || []).filter((m) => {
-      if (filter === "all") return true;
-      return m.track === filter;
-    });
+    const modules = window.WEAVE_LEARN_MODULES || [];
     if (!modules.length) {
       root.innerHTML = `<p class="learn-empty">${t("learn.empty", lang)}</p>`;
       return;
@@ -139,20 +100,18 @@
           .map((s) => `<span class="tag tag--edu">${skillLabel(s, lang)}</span>`)
           .join("");
         const sdgs = (m.sdgs || []).map((s) => `<span class="tag tag--sus">SDG ${s}</span>`).join("");
-        const track = m.track
-          ? `<span class="tag ${trackTagClass(m.track)}">${trackLabel(m.track, lang)}</span>`
-          : "";
         const date = window.Weave ? window.Weave.formatDate(m.date, lang) : m.date;
         const title = textOf(m.title, lang);
         const excerpt = textOf(m.excerpt, lang);
-        const href = m.href || "week-" + encodeURIComponent(m.id) + ".html";
+        return `
+        const href = m.href || ("week-" + encodeURIComponent(m.id) + ".html");
         return `
           <a class="article-item" href="${href}">
             <span class="article-item__meta">${date} · ${m.minutes || 8} ${t("learn.minutes", lang)}</span>
             <span>
               <h3>${title}</h3>
               <p>${excerpt}</p>
-              <span class="tags">${track}${skills}${sdgs}<span class="tag tag--ai">${status}</span></span>
+              <span class="tags">${skills}${sdgs}<span class="tag tag--ai">${status}</span></span>
             </span>
             <span class="article-item__arrow" aria-hidden="true">→</span>
           </a>`;
@@ -183,83 +142,34 @@
       .map((s) => `<span class="tag tag--edu">${skillLabel(s, lang)}</span>`)
       .join("");
     const sdgs = (mod.sdgs || []).map((s) => `<span class="tag tag--sus">SDG ${s}</span>`).join("");
-    const track = mod.track
-      ? `<span class="tag ${trackTagClass(mod.track)}">${trackLabel(mod.track, lang)}</span>`
-      : "";
 
-    const byTrack = { "ai-literacy": [], "climate-resilience": [], other: [] };
-    (mod.questions || []).forEach((q, qi) => {
-      const key = TRACKS.includes(q.track) ? q.track : mod.track && TRACKS.includes(mod.track) ? mod.track : "other";
-      byTrack[key].push({ q, qi });
-    });
-
-    function renderQuestionGroup(items) {
-      return items
-        .map(({ q, qi }) => {
-          const choices = q.choices
-            .map((c, ci) => {
-              const checked = progress.answers && progress.answers[qi] === ci ? "checked" : "";
-              return `<label class="learn-choice"><input type="radio" name="q${qi}" value="${ci}" ${checked} /> <span>${textOf(c, lang)}</span></label>`;
-            })
-            .join("");
-          return `
+    const questions = (mod.questions || [])
+      .map((q, qi) => {
+        const choices = q.choices
+          .map((c, ci) => {
+            const checked = progress.answers && progress.answers[qi] === ci ? "checked" : "";
+            return `<label class="learn-choice"><input type="radio" name="q${qi}" value="${ci}" ${checked} /> <span>${textOf(c, lang)}</span></label>`;
+          })
+          .join("");
+        return `
           <fieldset class="learn-q" data-q="${qi}">
             <legend>${qi + 1}. ${textOf(q.prompt, lang)}</legend>
             ${choices}
             <p class="learn-explain" hidden></p>
           </fieldset>`;
-        })
-        .join("");
-    }
-
-    let quizHtml = "";
-    const multiTrack =
-      (byTrack["ai-literacy"].length > 0) + (byTrack["climate-resilience"].length > 0) > 1;
-    if (multiTrack) {
-      if (byTrack["ai-literacy"].length) {
-        quizHtml += `<h3 class="learn-quiz-track">${t("learn.trackAi", lang)}</h3>`;
-        quizHtml += renderQuestionGroup(byTrack["ai-literacy"]);
-      }
-      if (byTrack["climate-resilience"].length) {
-        quizHtml += `<h3 class="learn-quiz-track">${t("learn.trackClimate", lang)}</h3>`;
-        quizHtml += renderQuestionGroup(byTrack["climate-resilience"]);
-      }
-      if (byTrack.other.length) quizHtml += renderQuestionGroup(byTrack.other);
-    } else {
-      quizHtml = renderQuestionGroup(
-        byTrack["ai-literacy"]
-          .concat(byTrack["climate-resilience"])
-          .concat(byTrack.other)
-          .sort((a, b) => a.qi - b.qi)
-      );
-    }
-
-    const resources = (mod.resources || [])
-      .map(
-        (r) =>
-          `<li><a href="${r.href}" target="_blank" rel="noopener noreferrer">${textOf(r.label, lang)}</a></li>`
-      )
+      })
       .join("");
-    const resourcesBlock = resources
-      ? `<section class="learn-block">
-        <h2>${t("learn.resources", lang)}</h2>
-        <ul class="learn-resources">${resources}</ul>
-      </section>`
-      : "";
 
     const savedReflect = progress.reflection || "";
     const date = window.Weave ? window.Weave.formatDate(mod.date, lang) : mod.date;
-    const digest = mod.digestHref
-      ? `<p class="learn-digest"><a href="${mod.digestHref}">${t("learn.digestLink", lang)}</a></p>`
-      : "";
 
     mount.innerHTML = `
       <p class="eyebrow"><a href="index.html">${t("learn.back", lang)}</a></p>
       <h1 class="display learn-title">${textOf(mod.title, lang)}</h1>
       <p class="dek">${textOf(mod.excerpt, lang)}</p>
       <p class="learn-meta">${date} · ${mod.minutes || 8} ${t("learn.minutes", lang)}</p>
-      <p class="tags">${track}${skills}${sdgs}</p>
-      ${digest}
+      <p class="tags">${skills}${sdgs}</p>
+      <p class="learn-digest"><a href="${mod.digestHref}">${t("learn.digestLink", lang)}</a></p>
 
       <section class="learn-block">
         <h2>${t("learn.insights", lang)}</h2>
@@ -269,13 +179,11 @@
       <section class="learn-block">
         <h2>${t("learn.quiz", lang)}</h2>
         <form class="learn-quiz" data-learn-quiz>
-          ${quizHtml}
+          ${questions}
           <button class="btn btn--solid" type="submit">${t("learn.submit", lang)}</button>
           <p class="learn-score" data-learn-score hidden></p>
         </form>
       </section>
-
-      ${resourcesBlock}
 
       <section class="learn-block">
         <h2>${t("learn.ethics", lang)}</h2>
