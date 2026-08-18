@@ -79,6 +79,9 @@ def send_resend(to_addr: str, subject: str, plain: str) -> None:
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
+            "Accept": "application/json",
+            # Cloudflare (in front of Resend) rejects bare Python-urllib UA (error 1010).
+            "User-Agent": "SAIL-digest/1.0 (+https://github.com/ProfNing/sail-website)",
         },
     )
     print(f"Sending 小红书 draft to {to_addr} via Resend …")
