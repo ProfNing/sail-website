@@ -38,13 +38,13 @@ jobs:
           git push
 
       # Email 小红书 draft to your phone. Skips if XHS_EMAIL_TO secret is unset.
-      # Repo secrets to add:
+      # Outlook / Microsoft 365 secrets:
       #   XHS_EMAIL_TO  — address you open on your phone
-      #   SMTP_HOST     — e.g. smtp.gmail.com
-      #   SMTP_PORT     — e.g. 587
-      #   SMTP_USER     — SMTP login
-      #   SMTP_PASS     — app password (not your normal login password)
-      #   SMTP_FROM     — optional From: (defaults to SMTP_USER)
+      #   SMTP_HOST     — smtp.office365.com
+      #   SMTP_PORT     — 587
+      #   SMTP_USER     — full Outlook address
+      #   SMTP_PASS     — password or Microsoft app password
+      #   SMTP_FROM     — same as SMTP_USER (optional)
       - name: Email 小红书 draft
         env:
           XHS_EMAIL_TO: ${{ secrets.XHS_EMAIL_TO }}
