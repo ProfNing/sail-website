@@ -37,17 +37,19 @@ jobs:
           git commit -m "Publish daily SAIL digest ($(date -u +%Y-%m-%d))"
           git push
 
-      # Email 小红书 draft to your phone. Skips if XHS_EMAIL_TO secret is unset.
-      # Outlook / Microsoft 365 secrets:
-      #   XHS_EMAIL_TO  — address you open on your phone
-      #   SMTP_HOST     — smtp.office365.com
-      #   SMTP_PORT     — 587
-      #   SMTP_USER     — full Outlook address
-      #   SMTP_PASS     — password or Microsoft app password
-      #   SMTP_FROM     — same as SMTP_USER (optional)
+      # Prefer Resend (Outlook blocks basic SMTP auth for many accounts).
+      # Secrets:
+      #   XHS_EMAIL_TO     — Outlook (or any) inbox on your phone
+      #   RESEND_API_KEY   — https://resend.com
+      #   EMAIL_FROM       — verified sender in Resend, e.g. onboarding@resend.dev while testing
+      # Optional SMTP fallback (Gmail app password, etc.):
+      #   SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM
       - name: Email 小红书 draft
+        continue-on-error: true
         env:
           XHS_EMAIL_TO: ${{ secrets.XHS_EMAIL_TO }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}

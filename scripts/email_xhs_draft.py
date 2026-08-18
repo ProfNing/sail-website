@@ -2,28 +2,34 @@
 """
 Email private/xiaohongshu/latest.md to your phone inbox.
 
-Used by GitHub Actions after the daily digest. Skips quietly if secrets
-are not configured.
+Used by GitHub Actions after the daily digest. Skips quietly if no
+mail secrets are configured.
 
-Required env:
-  XHS_EMAIL_TO   — your address (phone mail app)
-  SMTP_HOST      — e.g. smtp.gmail.com
-  SMTP_PORT      — e.g. 587
-  SMTP_USER      — SMTP login
-  SMTP_PASS      — SMTP password / app password
+Option A — Resend (recommended; works when Outlook blocks basic SMTP):
+  RESEND_API_KEY   — from https://resend.com
+  XHS_EMAIL_TO     — inbox on your phone (Outlook OK as *recipient*)
+  EMAIL_FROM       — must be a verified sender/domain in Resend
+                     (or Resend's onboarding from-address)
 
-Optional:
-  SMTP_FROM      — From address (defaults to SMTP_USER)
-  XHS_DRAFT_PATH — override path to the markdown draft
+Option B — SMTP (Gmail app password, etc.):
+  XHS_EMAIL_TO, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
+  SMTP_FROM optional (defaults to SMTP_USER)
+
+Note: Personal Outlook often rejects SMTP password login
+("basic authentication is disabled"). Prefer Resend, and keep
+Outlook only as XHS_EMAIL_TO.
 """
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import smtplib
 import ssl
 import sys
+import urllib.error
+import urllib.request
 from email.message import EmailMessage
 from pathlib import Path
 
@@ -39,12 +45,53 @@ def parse_title_body(md: str) -> tuple[str, str]:
     return title, body
 
 
-def main() -> int:
-    to_addr = (os.environ.get("XHS_EMAIL_TO") or "").strip()
-    if not to_addr:
-        print("XHS_EMAIL_TO not set — skip email (add repo secrets to enable)")
-        return 0
+def build_plain(title: str, body: str) -> str:
+    plain = ""
+    if title:
+        plain += f"标题\n{title}\n\n"
+    plain += f"正文\n{body}\n"
+    plain += (
+        "\n——\n"
+        "复制标题和正文到小红书 App 即可发布。"
+        "草稿仅发到你的邮箱，不会公开到网站。\n"
+    )
+    return plain
 
+
+def send_resend(to_addr: str, subject: str, plain: str) -> None:
+    api_key = (os.environ.get("RESEND_API_KEY") or "").strip()
+    from_addr = (os.environ.get("EMAIL_FROM") or "").strip()
+    if not api_key or not from_addr:
+        raise SystemExit(
+            "RESEND_API_KEY and EMAIL_FROM are required for Resend sending"
+        )
+    payload = {
+        "from": from_addr,
+        "to": [to_addr],
+        "subject": subject,
+        "text": plain,
+    }
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        "https://api.resend.com/emails",
+        data=data,
+        method="POST",
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+    )
+    print(f"Sending 小红书 draft to {to_addr} via Resend …")
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            print(resp.read().decode("utf-8", errors="replace"))
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        raise SystemExit(f"Resend HTTP {exc.code}: {detail}") from exc
+    print("Email sent (Resend).")
+
+
+def send_smtp(to_addr: str, subject: str, plain: str) -> None:
     host = (os.environ.get("SMTP_HOST") or "").strip()
     user = (os.environ.get("SMTP_USER") or "").strip()
     password = (os.environ.get("SMTP_PASS") or "").strip()
@@ -52,28 +99,9 @@ def main() -> int:
     from_addr = (os.environ.get("SMTP_FROM") or user).strip()
 
     if not host or not user or not password or not from_addr:
-        print(
-            "SMTP_HOST / SMTP_USER / SMTP_PASS (and SMTP_FROM) required when XHS_EMAIL_TO is set",
-            file=sys.stderr,
+        raise SystemExit(
+            "SMTP_HOST / SMTP_USER / SMTP_PASS required when using SMTP"
         )
-        return 1
-
-    draft_path = Path(os.environ.get("XHS_DRAFT_PATH") or DEFAULT_DRAFT)
-    if not draft_path.is_file():
-        print(f"Draft not found: {draft_path}", file=sys.stderr)
-        return 1
-
-    md = draft_path.read_text(encoding="utf-8")
-    title, body = parse_title_body(md)
-    subject = f"SAIL 小红书｜{title}" if title else "SAIL 小红书草稿"
-    if len(subject) > 80:
-        subject = subject[:77] + "…"
-
-    plain = ""
-    if title:
-        plain += f"标题\n{title}\n\n"
-    plain += f"正文\n{body}\n"
-    plain += "\n——\n复制标题和正文到小红书 App 即可发布。草稿仅发到你的邮箱，不会公开到网站。\n"
 
     msg = EmailMessage()
     msg["Subject"] = subject
@@ -91,7 +119,40 @@ def main() -> int:
             smtp.ehlo()
         smtp.login(user, password)
         smtp.send_message(msg)
-    print("Email sent.")
+    print("Email sent (SMTP).")
+
+
+def main() -> int:
+    to_addr = (os.environ.get("XHS_EMAIL_TO") or "").strip()
+    if not to_addr:
+        print("XHS_EMAIL_TO not set — skip email")
+        return 0
+
+    draft_path = Path(os.environ.get("XHS_DRAFT_PATH") or DEFAULT_DRAFT)
+    if not draft_path.is_file():
+        print(f"Draft not found: {draft_path}", file=sys.stderr)
+        return 1
+
+    md = draft_path.read_text(encoding="utf-8")
+    title, body = parse_title_body(md)
+    subject = f"SAIL 小红书｜{title}" if title else "SAIL 小红书草稿"
+    if len(subject) > 80:
+        subject = subject[:77] + "…"
+    plain = build_plain(title, body)
+
+    if (os.environ.get("RESEND_API_KEY") or "").strip():
+        send_resend(to_addr, subject, plain)
+        return 0
+
+    if (os.environ.get("SMTP_HOST") or "").strip():
+        send_smtp(to_addr, subject, plain)
+        return 0
+
+    print(
+        "No RESEND_API_KEY or SMTP_HOST — skip email. "
+        "Outlook often blocks SMTP passwords; Resend is recommended.",
+        file=sys.stderr,
+    )
     return 0
 
 
