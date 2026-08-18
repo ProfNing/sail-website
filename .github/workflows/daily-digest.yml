@@ -24,11 +24,11 @@ jobs:
       - name: Collect feeds + publish digest
         run: python3 scripts/publish_digest.py
 
-      - name: Commit public digest (not private collected.js)
+      - name: Commit public digest (not private drafts / collected.js)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Keep inbox private — never commit js/collected.js
+          # Keep inbox + 小红书 drafts private — never commit them
           git add articles/digest-*.html js/i18n.js
           if git diff --cached --quiet; then
             echo "No digest changes"
@@ -36,3 +36,21 @@ jobs:
           fi
           git commit -m "Publish daily SAIL digest ($(date -u +%Y-%m-%d))"
           git push
+
+      # Email 小红书 draft to your phone. Skips if XHS_EMAIL_TO secret is unset.
+      # Repo secrets to add:
+      #   XHS_EMAIL_TO  — address you open on your phone
+      #   SMTP_HOST     — e.g. smtp.gmail.com
+      #   SMTP_PORT     — e.g. 587
+      #   SMTP_USER     — SMTP login
+      #   SMTP_PASS     — app password (not your normal login password)
+      #   SMTP_FROM     — optional From: (defaults to SMTP_USER)
+      - name: Email 小红书 draft
+        env:
+          XHS_EMAIL_TO: ${{ secrets.XHS_EMAIL_TO }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+        run: python3 scripts/email_xhs_draft.py
