@@ -109,6 +109,10 @@ def _headline_hook(zh: str) -> str:
     s = re.sub(r"\s+", "", zh)
     s = re.sub(r"[《》【】\[\]（）()“”\"']", "", s)
     s = re.split(r"[-—|:：]", s)[0]
+    # Prefer a run of CJK characters so mixed EN tokens don't get half-cut
+    m = re.search(r"[\u4e00-\u9fff]{2,8}", s)
+    if m:
+        return m.group(0)
     if len(s) > 8:
         s = s[:8]
     return s
