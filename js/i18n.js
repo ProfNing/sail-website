@@ -304,9 +304,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 24, 2026",
-      zh: "SAIL 每日简报 — 2026年8月24日",
-      ko: "SAIL 일일 요약 — 2026년 8월 24일",
+      en: "SAIL Daily Digest — Monday, August 24, 2026",
+      zh: "SAIL 每日简报 — 2026年8月24日（周一）",
+      ko: "SAIL 일일 요약 — 2026년 8월 24일 (월요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 12 headlines — 7 AI, 2 sustainability, 6 learning.",
@@ -321,9 +321,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 23, 2026",
-      zh: "SAIL 每日简报 — 2026年8月23日",
-      ko: "SAIL 일일 요약 — 2026년 8월 23일",
+      en: "SAIL Daily Digest — Sunday, August 23, 2026",
+      zh: "SAIL 每日简报 — 2026年8月23日（周日）",
+      ko: "SAIL 일일 요약 — 2026년 8월 23일 (일요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 6 headlines — 5 AI, 1 sustainability, 2 learning.",
@@ -338,9 +338,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 22, 2026",
-      zh: "SAIL 每日简报 — 2026年8月22日",
-      ko: "SAIL 일일 요약 — 2026년 8월 22일",
+      en: "SAIL Daily Digest — Saturday, August 22, 2026",
+      zh: "SAIL 每日简报 — 2026年8月22日（周六）",
+      ko: "SAIL 일일 요약 — 2026년 8월 22일 (토요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 8 headlines — 5 AI, 0 sustainability, 4 learning.",
@@ -355,9 +355,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 21, 2026",
-      zh: "SAIL 每日简报 — 2026年8月21日",
-      ko: "SAIL 일일 요약 — 2026년 8월 21일",
+      en: "SAIL Daily Digest — Friday, August 21, 2026",
+      zh: "SAIL 每日简报 — 2026年8月21日（周五）",
+      ko: "SAIL 일일 요약 — 2026년 8월 21일 (금요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 8 headlines — 5 AI, 0 sustainability, 5 learning.",
@@ -372,9 +372,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 20, 2026",
-      zh: "SAIL 每日简报 — 2026年8月20日",
-      ko: "SAIL 일일 요약 — 2026년 8월 20일",
+      en: "SAIL Daily Digest — Thursday, August 20, 2026",
+      zh: "SAIL 每日简报 — 2026年8月20日（周四）",
+      ko: "SAIL 일일 요약 — 2026년 8월 20일 (목요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 13 headlines — 7 AI, 3 sustainability, 8 learning.",
@@ -389,9 +389,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 19, 2026",
-      zh: "SAIL 每日简报 — 2026年8月19日",
-      ko: "SAIL 일일 요약 — 2026년 8월 19일",
+      en: "SAIL Daily Digest — Wednesday, August 19, 2026",
+      zh: "SAIL 每日简报 — 2026年8月19日（周三）",
+      ko: "SAIL 일일 요약 — 2026년 8월 19일 (수요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 11 headlines — 5 AI, 1 sustainability, 8 learning.",
@@ -406,9 +406,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 18, 2026",
-      zh: "SAIL 每日简报 — 2026年8月18日",
-      ko: "SAIL 일일 요약 — 2026년 8월 18일",
+      en: "SAIL Daily Digest — Tuesday, August 18, 2026",
+      zh: "SAIL 每日简报 — 2026年8月18日（周二）",
+      ko: "SAIL 일일 요약 — 2026년 8월 18일 (화요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 12 headlines — 7 AI, 2 sustainability, 7 learning.",
@@ -427,9 +427,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 17, 2026",
-      zh: "SAIL 每日简报 — 2026年8月17日",
-      ko: "SAIL 일일 요약 — 2026년 8월 17일",
+      en: "SAIL Daily Digest — Monday, August 17, 2026",
+      zh: "SAIL 每日简报 — 2026年8月17日（周一）",
+      ko: "SAIL 일일 요약 — 2026년 8월 17일 (월요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 8 headlines — 7 AI, 2 sustainability, 2 learning.",
@@ -444,9 +444,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 16, 2026",
-      zh: "SAIL 每日简报 — 2026年8月16日",
-      ko: "SAIL 일일 요약 — 2026년 8월 16일",
+      en: "SAIL Daily Digest — Sunday, August 16, 2026",
+      zh: "SAIL 每日简报 — 2026年8月16日（周日）",
+      ko: "SAIL 일일 요약 — 2026년 8월 16일 (일요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 6 headlines — 5 AI, 0 sustainability, 2 learning.",
@@ -461,9 +461,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 15, 2026",
-      zh: "SAIL 每日简报 — 2026年8月15日",
-      ko: "SAIL 일일 요약 — 2026년 8월 15일",
+      en: "SAIL Daily Digest — Saturday, August 15, 2026",
+      zh: "SAIL 每日简报 — 2026年8月15日（周六）",
+      ko: "SAIL 일일 요약 — 2026년 8월 15일 (토요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 7 headlines — 6 AI, 1 sustainability, 2 learning.",
@@ -478,9 +478,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 14, 2026",
-      zh: "SAIL 每日简报 — 2026年8月14日",
-      ko: "SAIL 일일 요약 — 2026년 8월 14일",
+      en: "SAIL Daily Digest — Friday, August 14, 2026",
+      zh: "SAIL 每日简报 — 2026年8月14日（周五）",
+      ko: "SAIL 일일 요약 — 2026년 8월 14일 (금요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 7 headlines — 5 AI, 0 sustainability, 5 learning.",
@@ -495,9 +495,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 13, 2026",
-      zh: "SAIL 每日简报 — 2026年8月13日",
-      ko: "SAIL 일일 요약 — 2026년 8월 13일",
+      en: "SAIL Daily Digest — Thursday, August 13, 2026",
+      zh: "SAIL 每日简报 — 2026年8月13日（周四）",
+      ko: "SAIL 일일 요약 — 2026년 8월 13일 (목요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 13 headlines — 8 AI, 3 sustainability, 7 learning.",
@@ -512,9 +512,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 12, 2026",
-      zh: "SAIL 每日简报 — 2026年8月12日",
-      ko: "SAIL 일일 요약 — 2026년 8월 12일",
+      en: "SAIL Daily Digest — Wednesday, August 12, 2026",
+      zh: "SAIL 每日简报 — 2026年8月12日（周三）",
+      ko: "SAIL 일일 요약 — 2026년 8월 12일 (수요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 9 headlines — 6 AI, 1 sustainability, 5 learning.",
@@ -529,9 +529,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 11, 2026",
-      zh: "SAIL 每日简报 — 2026年8月11日",
-      ko: "SAIL 일일 요약 — 2026년 8월 11일",
+      en: "SAIL Daily Digest — Tuesday, August 11, 2026",
+      zh: "SAIL 每日简报 — 2026年8月11日（周二）",
+      ko: "SAIL 일일 요약 — 2026년 8월 11일 (화요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 10 headlines — 6 AI, 1 sustainability, 6 learning.",
@@ -546,9 +546,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 10, 2026",
-      zh: "SAIL 每日简报 — 2026年8月10日",
-      ko: "SAIL 일일 요약 — 2026년 8월 10일",
+      en: "SAIL Daily Digest — Monday, August 10, 2026",
+      zh: "SAIL 每日简报 — 2026年8月10日（周一）",
+      ko: "SAIL 일일 요약 — 2026년 8월 10일 (월요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 7 headlines — 6 AI, 1 sustainability, 3 learning.",
@@ -563,9 +563,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 9, 2026",
-      zh: "SAIL 每日简报 — 2026年8月9日",
-      ko: "SAIL 일일 요약 — 2026년 8월 9일",
+      en: "SAIL Daily Digest — Sunday, August 9, 2026",
+      zh: "SAIL 每日简报 — 2026年8月9日（周日）",
+      ko: "SAIL 일일 요약 — 2026년 8월 9일 (일요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 6 headlines — 5 AI, 0 sustainability, 3 learning.",
@@ -580,9 +580,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 8, 2026",
-      zh: "SAIL 每日简报 — 2026年8月8日",
-      ko: "SAIL 일일 요약 — 2026년 8월 8일",
+      en: "SAIL Daily Digest — Saturday, August 8, 2026",
+      zh: "SAIL 每日简报 — 2026年8月8日（周六）",
+      ko: "SAIL 일일 요약 — 2026년 8월 8일 (토요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 10 headlines — 5 AI, 0 sustainability, 6 learning.",
@@ -597,9 +597,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 7, 2026",
-      zh: "SAIL 每日简报 — 2026年8月7日",
-      ko: "SAIL 일일 요약 — 2026년 8월 7일",
+      en: "SAIL Daily Digest — Friday, August 7, 2026",
+      zh: "SAIL 每日简报 — 2026年8月7日（周五）",
+      ko: "SAIL 일일 요약 — 2026년 8월 7일 (금요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 13 headlines — 6 AI, 3 sustainability, 9 learning.",
@@ -614,9 +614,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 6, 2026",
-      zh: "SAIL 每日简报 — 2026年8月6日",
-      ko: "SAIL 일일 요약 — 2026년 8월 6일",
+      en: "SAIL Daily Digest — Thursday, August 6, 2026",
+      zh: "SAIL 每日简报 — 2026年8月6日（周四）",
+      ko: "SAIL 일일 요약 — 2026년 8월 6일 (목요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 12 headlines — 7 AI, 2 sustainability, 7 learning.",
@@ -633,9 +633,9 @@ window.WEAVE_ARTICLES = [
     minutes: 4,
     topics: ["ai", "sus", "edu"],
     title: {
-      en: "SAIL Daily Digest — August 5, 2026",
-      zh: "SAIL 每日简报 — 2026年8月5日",
-      ko: "SAIL 일일 요약 — 2026년 8월 5일",
+      en: "SAIL Daily Digest — Wednesday, August 5, 2026",
+      zh: "SAIL 每日简报 — 2026年8月5日（周三）",
+      ko: "SAIL 일일 요약 — 2026년 8월 5일 (수요일)",
     },
     excerpt: {
       en: "Today’s public-source roundup: 18 headlines — 10 AI, 8 sustainability, 10 learning.",

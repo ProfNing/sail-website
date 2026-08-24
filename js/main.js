@@ -100,6 +100,7 @@
     try {
       const locale = lang === "zh" ? "zh-CN" : lang === "ko" ? "ko-KR" : "en-US";
       return new Intl.DateTimeFormat(locale, {
+        weekday: "short",
         year: "numeric",
         month: "short",
         day: "numeric",

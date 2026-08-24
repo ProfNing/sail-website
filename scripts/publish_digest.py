@@ -152,11 +152,18 @@ def bucket_for(item: dict) -> str:
 
 
 def format_when(d: date, lang: str) -> str:
+    """Human date with weekday, used in digest titles (EN / 中文 / 한국어)."""
+    # date.weekday(): Monday=0 … Sunday=6
+    zh_wd = ("周一", "周二", "周三", "周四", "周五", "周六", "周日")[d.weekday()]
+    ko_wd = ("월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일")[
+        d.weekday()
+    ]
     if lang == "zh":
-        return f"{d.year}年{d.month}月{d.day}日"
+        return f"{d.year}年{d.month}月{d.day}日（{zh_wd}）"
     if lang == "ko":
-        return f"{d.year}년 {d.month}월 {d.day}일"
-    return d.strftime("%B %d, %Y").replace(" 0", " ")
+        return f"{d.year}년 {d.month}월 {d.day}일 ({ko_wd})"
+    # Monday, August 24, 2026
+    return d.strftime("%A, %B %d, %Y").replace(" 0", " ")
 
 
 def normalize_title(title: str) -> str:
