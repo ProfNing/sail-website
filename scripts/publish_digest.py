@@ -35,6 +35,7 @@ SITE_DIGEST_BASE = "https://profning.github.io/sail-website/articles"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from collect_feeds import collect, write_js  # noqa: E402
+from xhs_draft import write_xiaohongshu_draft  # noqa: E402
 
 TOPIC_TAGS = {
     "ai": '<span class="tag tag--ai">AI</span>',
@@ -445,134 +446,6 @@ def render_article(day: date, titles: dict, excerpts: dict, bodies: dict) -> str
 def js_str(s: str) -> str:
     return json.dumps(s, ensure_ascii=False)
 
-
-def write_xiaohongshu_draft(
-    day: date,
-    items: list[dict],
-    translated: dict[tuple[str, str], str],
-) -> Path | None:
-    """
-    Private Chinese note for 小红书 — local files only (gitignored).
-    Written on GitHub Actions too so the workflow can email latest.md;
-    never committed (see .gitignore).
-    """
-    XHS_DIR.mkdir(parents=True, exist_ok=True)
-    when_short = f"{day.month}月{day.day}日"
-    c = counts(items)
-
-    buckets: dict[str, list[dict]] = defaultdict(list)
-    for item in items:
-        buckets[bucket_for(item)].append(item)
-
-    def zh_title(item: dict) -> str:
-        return translated.get((item["title"], "zh"), item["title"]).strip()
-
-    def pick(key: str, n: int = 2) -> list[str]:
-        return [zh_title(it) for it in (buckets.get(key) or [])[:n]]
-
-    edu = pick("edu", 2)
-    ai = pick("ai", 2)
-    ai_sus = pick("ai_sus", 2)
-    sus = pick("sus", 2)
-
-    # Punchy title from the strongest intersecting themes
-    title_bits: list[str] = []
-    if edu:
-        title_bits.append("课堂与考试")
-    if ai and not title_bits:
-        title_bits.append("AI产业")
-    elif ai:
-        title_bits.append("工具与治理")
-    if ai_sus or sus:
-        title_bits.append("气候账本")
-    if len(title_bits) >= 2:
-        title = f"{title_bits[0]}在变，{title_bits[1]}也在逼近"
-    elif title_bits:
-        title = f"今日观察：{title_bits[0]}"
-    else:
-        title = f"SAIL每日观察｜{day.month}/{day.day}"
-    if len(title) > 20:
-        title = title[:20]
-
-    sections: list[str] = []
-    n = 1
-    if edu:
-        lines = "\n".join(f"· {t}" for t in edu)
-        sections.append(
-            f"{'一二三四五'[n - 1]}、学习\n"
-            f"教育侧信号：\n{lines}\n"
-            f"提醒：AI 素养首先是评价与披露素养——考什么、怎么声明、谁负责，比「禁不禁工具」更关键。"
-        )
-        n += 1
-    if ai:
-        lines = "\n".join(f"· {t}" for t in ai)
-        sections.append(
-            f"{'一二三四五'[n - 1]}、人工智能\n"
-            f"工具与产业侧：\n{lines}\n"
-            f"看点：能力分层、检测/隐私、并购与通道——谁控制模型调用，谁就改写依赖结构。"
-        )
-        n += 1
-    if ai_sus or sus:
-        lines = "\n".join(f"· {t}" for t in (ai_sus + sus)[:3])
-        sections.append(
-            f"{'一二三四五'[n - 1]}、可持续\n"
-            f"气候与资源侧：\n{lines}\n"
-            f"算力有碳账，应用也可能减灾节能——关键是谁在测、测什么、方法是否公开。"
-        )
-        n += 1
-
-    if not sections:
-        sections.append("本日公开源暂无足够条目；可先看网站简报后补写观察。")
-
-    body = "\n".join(
-        [
-            f"【SAIL 启航 · 每日观察】{when_short}",
-            "",
-            "不堆新闻，只挑跟「可持续 · 人工智能 · 学习」真正相关的变化。",
-            "",
-            "——",
-            "",
-            "\n\n".join(sections),
-            "",
-            "——",
-            "",
-            "（自动草稿 · 发布前可再改标题与收束句）",
-            f"今日共 {len(items)} 条：人工智能 {c['ai']} · 可持续 {c['sus']} · 学习 {c['edu']}",
-            "",
-            "完整中英韩版简报：",
-            f"{SITE_DIGEST_BASE}/digest-{day.isoformat()}.html",
-            "",
-            "#SAIL启航 #人工智能 #可持续 #AI教育 #每日观察",
-            "",
-        ]
-    )
-
-    note = (
-        f"# 小红书草稿（私密 · 勿公开到网站）\n"
-        f"# hand-edited: false\n"
-        f"# 生成时间：{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}\n"
-        f"# 用法：复制下面「标题」和「正文」到小红书 App 发布\n\n"
-        f"## 标题\n\n{title}\n\n"
-        f"## 正文\n\n{body}"
-    )
-
-    dated = XHS_DIR / f"digest-{day.isoformat()}.md"
-    latest = XHS_DIR / "latest.md"
-    # Don't overwrite a hand-edited latest unless it's a new day file only —
-    # still write dated; for latest, skip if hand-edited: true
-    dated.write_text(note, encoding="utf-8")
-    skip_latest = False
-    if latest.exists():
-        head = latest.read_text(encoding="utf-8")[:400]
-        if "hand-edited: true" in head and f"digest-{day.isoformat()}" not in head:
-            # Keep prior hand edit of another day? Still refresh latest for email workflow.
-            pass
-        if "hand-edited: true" in head and f"{day.month}月{day.day}日" in head:
-            skip_latest = True
-            print("Keeping hand-edited latest.md (not overwritten)")
-    if not skip_latest:
-        latest.write_text(note, encoding="utf-8")
-    return dated
 
 
 def upsert_catalog(day: date, titles: dict, excerpts: dict) -> None:

@@ -2,30 +2,46 @@
 
 这里的 `digest-*.md` / `latest.md` **不会**推送到 GitHub 或公开网站（已在 `.gitignore`）。
 
-## 每天发到手机（推荐：Resend → 你的 Outlook）
+## 为什么以前标题总撞车？
 
-Outlook 个人/许多学校账号会禁用 SMTP「密码登录」（报错
-`basic authentication is disabled`）。所以：
+旧逻辑用固定模板（如「课堂与考试在变，气候账本也在逼近」）+ 每天相同的「看点/提醒」套话，所以会：
 
-- **收件箱**继续用 Outlook（手机上看信）
-- **发信**用 [Resend](https://resend.com)（Actions 友好）
+- 标题几乎不变  
+- 正文大段重复  
 
-### 设置
+现已改为：
 
-1. 注册 Resend，创建 API key  
-2. 仓库 **Settings → Secrets and variables → Actions** 添加：
+1. **推荐：LLM 润色**（有 API key 时）——按你的手改风格写新标题与三点观察  
+2. **兜底：启发式**——从当日中文标题抽钩子生成标题，去掉固定套话，并避开近日用过的标题  
+
+## 提高质量（推荐）
+
+在仓库 **Settings → Secrets → Actions** 添加：
+
+| Secret | 说明 |
+|--------|------|
+| `XHS_LLM_API_KEY` | OpenAI 兼容接口的 key（也可用 `OPENAI_API_KEY`） |
+| `XHS_LLM_BASE_URL` | 可选，默认 `https://api.openai.com/v1` |
+| `XHS_LLM_MODEL` | 可选，默认 `gpt-4o-mini` |
+
+用 DeepSeek / Groq / Azure 等亦可，只要兼容 Chat Completions。
+
+本地试跑：
+
+```bash
+export XHS_LLM_API_KEY='sk-...'
+python3 scripts/publish_digest.py --date 2026-08-24 --skip-collect
+# 看 private/xiaohongshu/latest.md
+```
+
+手改过的稿件请保留文件头 `# hand-edited: true`，同日自动任务不会覆盖 `latest.md`。
+
+## 每天发到手机（Resend → Outlook）
 
 | Secret | 填什么 |
 |--------|--------|
 | `XHS_EMAIL_TO` | 你的 Outlook 地址 |
 | `RESEND_API_KEY` | Resend API key |
-| `EMAIL_FROM` | Resend 已验证发件人。测试可用 `SAIL <onboarding@resend.dev>`（仅能发到你注册 Resend 的邮箱）；长期请验证自己的域名 |
+| `EMAIL_FROM` | 已验证发件人（测试可用 `SAIL <onboarding@resend.dev>`） |
 
-3. **Actions → Daily public digest → Run workflow** 测一次  
-
-邮件步骤失败时**不会**再把整个简报任务标红（`continue-on-error`）。
-
-### 可选：SMTP（Gmail 应用专用密码等）
-
-若不用 Resend，可设 `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS`。  
-Outlook SMTP 密码登录通常不可用，勿再依赖。
+未配置 LLM 时仍会发启发式草稿；配上 LLM 后邮件质量会接近你的手改版。

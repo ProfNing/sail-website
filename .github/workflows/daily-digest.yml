@@ -22,6 +22,13 @@ jobs:
           python-version: "3.12"
 
       - name: Collect feeds + publish digest
+        env:
+          # Optional: unlock high-quality 小红书 drafts (OpenAI-compatible)
+          # XHS_LLM_API_KEY, XHS_LLM_BASE_URL (optional), XHS_LLM_MODEL (optional, default gpt-4o-mini)
+          XHS_LLM_API_KEY: ${{ secrets.XHS_LLM_API_KEY }}
+          XHS_LLM_BASE_URL: ${{ secrets.XHS_LLM_BASE_URL }}
+          XHS_LLM_MODEL: ${{ secrets.XHS_LLM_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python3 scripts/publish_digest.py
 
       - name: Commit public digest (not private drafts / collected.js)
