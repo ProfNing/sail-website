@@ -436,11 +436,35 @@ def render_article(day: date, titles: dict, excerpts: dict, bodies: dict) -> str
     </div>
   </footer>
 
-  <script src="../js/i18n.js"></script>
-  <script src="../js/main.js"></script>
+  <script src="../js/i18n.js?v={day.isoformat()}"></script>
+  <script src="../js/main.js?v={day.isoformat()}"></script>
 </body>
 </html>
 """
+
+
+CACHE_BUST_PAGES = (
+    ROOT / "index.html",
+    ROOT / "about.html",
+    ROOT / "articles" / "index.html",
+    ROOT / "topics" / "ai.html",
+    ROOT / "topics" / "sustainability.html",
+    ROOT / "topics" / "education.html",
+    ROOT / "learn" / "index.html",
+)
+
+
+def bump_asset_cache(day: date) -> None:
+    """Force browsers to refetch i18n.js after a new digest lands in the catalog."""
+    ver = day.isoformat().replace("-", "")
+    pat = re.compile(r'(src="(?:\.\./)?js/(?:i18n|main)\.js)(?:\?[^"]*)?(")')
+    for path in CACHE_BUST_PAGES:
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        new = pat.sub(rf"\1?v={ver}\2", text)
+        if new != text:
+            path.write_text(new, encoding="utf-8")
 
 
 def js_str(s: str) -> str:
@@ -549,8 +573,10 @@ def main() -> None:
     out = ARTICLES / f"digest-{day.isoformat()}.html"
     out.write_text(render_article(day, titles, excerpts, bodies), encoding="utf-8")
     upsert_catalog(day, titles, excerpts)
+    bump_asset_cache(day)
     print(f"Wrote {out.relative_to(ROOT)}")
     print(f"Updated {I18N.relative_to(ROOT)}")
+    print("Bumped script cache-busters on listing pages")
 
     xhs = write_xiaohongshu_draft(day, items, translated)
     if xhs:
