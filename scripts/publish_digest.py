@@ -85,6 +85,64 @@ LABELS = {
 }
 
 
+def _translate_gtx(piece: str, sl: str, tl: str) -> str:
+    params = urllib.parse.urlencode(
+        {"client": "gtx", "sl": sl, "tl": tl, "dt": "t", "q": piece}
+    )
+    url = "https://translate.googleapis.com/translate_a/single?" + params
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (compatible; SAIL-digest/1.1; +https://profning.github.io/sail-website/)"
+            )
+        },
+    )
+    last_exc: Exception | None = None
+    for attempt in range(1):
+        try:
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            return "".join(part[0] for part in data[0] if part and part[0])
+        except Exception as exc:
+            last_exc = exc
+            # One short pause; then caller falls back to MyMemory
+            time.sleep(0.8)
+    raise RuntimeError(f"gtx failed: {last_exc}")
+
+
+def _translate_mymemory(piece: str, tl: str) -> str:
+    # Free fallback when Google gtx rate-limits GitHub Actions / shared IPs.
+    pair_tl = "zh-CN" if tl in ("zh", "zh-CN") else tl
+    params = urllib.parse.urlencode({"q": piece, "langpair": f"en|{pair_tl}"})
+    url = "https://api.mymemory.translated.net/get?" + params
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "SAIL-digest/1.1"},
+    )
+    last_exc: Exception | None = None
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            text = (data.get("responseData") or {}).get("translatedText") or ""
+            # MyMemory returns the QUERY itself when daily quota is exhausted
+            if not text or text.strip() == piece.strip():
+                raise RuntimeError(f"mymemory empty/quota: {data.get('responseStatus')}")
+            if "MYMEMORY WARNING" in text.upper():
+                raise RuntimeError(text[:120])
+            return text
+        except Exception as exc:
+            last_exc = exc
+            delay = 1.5 * (2**attempt)
+            print(
+                f"mymemory retry ({pair_tl}) attempt {attempt + 1}/4 after {delay:.1f}s: {exc}",
+                file=sys.stderr,
+            )
+            time.sleep(delay)
+    raise RuntimeError(f"mymemory failed: {last_exc}")
+
+
 def translate_text(text: str, target: str, source: str = "en") -> str:
     text = (text or "").strip()
     if not text:
@@ -96,7 +154,7 @@ def translate_text(text: str, target: str, source: str = "en") -> str:
     sl = lang_map.get(source, source)
     tl = lang_map.get(target, target)
 
-    max_len = 1500
+    max_len = 450  # MyMemory is happier with shorter queries
     pieces = []
     remaining = text
     while remaining:
@@ -116,27 +174,48 @@ def translate_text(text: str, target: str, source: str = "en") -> str:
         if not piece.strip():
             out.append(piece)
             continue
-        params = urllib.parse.urlencode(
-            {"client": "gtx", "sl": sl, "tl": tl, "dt": "t", "q": piece}
-        )
-        url = "https://translate.googleapis.com/translate_a/single?" + params
-        req = urllib.request.Request(url, headers={"User-Agent": "SAIL-digest/1.0"})
         try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
-        except Exception as exc:
-            time.sleep(1.0)
+            out.append(_translate_gtx(piece, sl, tl))
+        except Exception as gtx_exc:
+            print(f"gtx unavailable ({tl}): {gtx_exc}; trying mymemory", file=sys.stderr)
             try:
-                with urllib.request.urlopen(req, timeout=30) as resp:
-                    data = json.loads(resp.read().decode("utf-8"))
-            except Exception:
-                print(f"translate failed ({target}): {exc}", file=sys.stderr)
+                out.append(_translate_mymemory(piece, tl))
+            except Exception as mm_exc:
+                print(f"translate failed ({tl}): {mm_exc}", file=sys.stderr)
                 out.append(piece)
-                continue
-        out.append("".join(part[0] for part in data[0] if part and part[0]))
         if i < len(pieces) - 1:
-            time.sleep(0.2)
+            time.sleep(0.35)
     return "".join(out)
+
+
+def _cjk_ratio(s: str) -> float:
+    letters = [c for c in s if c.isalpha() or "\u4e00" <= c <= "\u9fff" or "\uac00" <= c <= "\ud7af"]
+    if not letters:
+        return 0.0
+    cjk = sum(1 for c in letters if "\u4e00" <= c <= "\u9fff" or "\uac00" <= c <= "\ud7af")
+    return cjk / len(letters)
+
+
+def assert_translations_ok(items: list[dict], translated: dict) -> None:
+    """Fail the job if ZH/KO headlines mostly fell back to English (e.g. gtx 429)."""
+    titles = [it.get("title") or "" for it in items if it.get("title")]
+    if not titles:
+        return
+    for lang, label in (("zh", "Chinese"), ("ko", "Korean")):
+        same = 0
+        weak = 0
+        for t in titles:
+            out = translated.get((t, lang), t)
+            if out.strip() == t.strip():
+                same += 1
+            elif _cjk_ratio(out) < 0.15:
+                weak += 1
+        bad = same + weak
+        if bad > max(1, len(titles) // 3):
+            raise SystemExit(
+                f"{label} translations look English ({bad}/{len(titles)} weak). "
+                "Translation APIs likely rate-limited; retry later."
+            )
 
 
 def bucket_for(item: dict) -> str:
@@ -555,9 +634,11 @@ def main() -> None:
     for text in unique_texts:
         translated[(text, "en")] = text
         translated[(text, "zh")] = translate_text(text, "zh", source="en")
-        time.sleep(0.15)
+        time.sleep(0.55)
         translated[(text, "ko")] = translate_text(text, "ko", source="en")
-        time.sleep(0.15)
+        time.sleep(0.55)
+
+    assert_translations_ok(digest_items, translated)
 
     items = digest_items
 
