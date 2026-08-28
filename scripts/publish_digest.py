@@ -175,13 +175,14 @@ def translate_text(text: str, target: str, source: str = "en") -> str:
             out.append(piece)
             continue
         try:
-            out.append(_translate_gtx(piece, sl, tl))
-        except Exception as gtx_exc:
-            print(f"gtx unavailable ({tl}): {gtx_exc}; trying mymemory", file=sys.stderr)
+            # MyMemory first: Google gtx often 429s from GitHub Actions / shared IPs
+            out.append(_translate_mymemory(piece, tl))
+        except Exception as mm_exc:
+            print(f"mymemory unavailable ({tl}): {mm_exc}; trying gtx", file=sys.stderr)
             try:
-                out.append(_translate_mymemory(piece, tl))
-            except Exception as mm_exc:
-                print(f"translate failed ({tl}): {mm_exc}", file=sys.stderr)
+                out.append(_translate_gtx(piece, sl, tl))
+            except Exception as gtx_exc:
+                print(f"translate failed ({tl}): {gtx_exc}", file=sys.stderr)
                 out.append(piece)
         if i < len(pieces) - 1:
             time.sleep(0.35)
