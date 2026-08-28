@@ -2,8 +2,9 @@ name: Daily public digest
 
 on:
   schedule:
-    # Daily at 06:30 UTC
+    # Primary + late backup (GitHub cron can delay or skip)
     - cron: "30 6 * * *"
+    - cron: "0 18 * * *"
   workflow_dispatch:
 
 permissions:
@@ -36,7 +37,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Keep inbox + 小红书 drafts private — never commit them
-          git add articles/digest-*.html js/i18n.js
+          # Listing pages get ?v= cache-busters so Home/Articles refetch i18n.js
+          git add articles/digest-*.html js/i18n.js index.html about.html \
+            articles/index.html topics/*.html learn/index.html
           if git diff --cached --quiet; then
             echo "No digest changes"
             exit 0
