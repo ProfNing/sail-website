@@ -309,11 +309,12 @@ window.WEAVE_ARTICLES = [
       ko: "SAIL 일일 요약 — 2026년 8월 31일 (월요일)",
     },
     excerpt: {
-      en: "Today’s public-source roundup: 8 headlines — 5 AI, 1 sustainability, 5 learning.",
-      zh: "今日公开来源速览：共 8 条——人工智能 5、可持续 1、学习 5。",
-      ko: "오늘 공개 출처 모음: 헤드라인 8건 — AI 5, 지속가능성 1, 학습 5.",
+      en: "Today’s public-source roundup: 10 headlines — 5 AI, 1 sustainability, 6 learning.",
+      zh: "今日公开来源速览：共 10 条——人工智能 5、可持续 1、学习 6。",
+      ko: "오늘 공개 출처 모음: 헤드라인 10건 — AI 5, 지속가능성 1, 학습 6.",
     },
   },
+
   {
     id: "digest-2026-08-30",
     href: "digest-2026-08-30.html",
