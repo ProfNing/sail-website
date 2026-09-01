@@ -593,9 +593,21 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", help="Digest date YYYY-MM-DD (default: today UTC)")
     parser.add_argument("--skip-collect", action="store_true", help="Reuse existing js/collected.js")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Rebuild even if articles/digest-YYYY-MM-DD.html already exists",
+    )
     args = parser.parse_args()
 
     day = date.fromisoformat(args.date) if args.date else datetime.now(timezone.utc).date()
+    out = ARTICLES / f"digest-{day.isoformat()}.html"
+    if out.exists() and not args.force:
+        print(
+            f"Digest for {day.isoformat()} already exists ({out.relative_to(ROOT)}); "
+            "skipping rewrite. Pass --force to rebuild."
+        )
+        return
 
     if args.skip_collect and (ROOT / "js" / "collected.js").exists():
         raw = (ROOT / "js" / "collected.js").read_text(encoding="utf-8")
@@ -652,7 +664,6 @@ def main() -> None:
     # For zh/ko titles/excerpts that are templates, also translate English templates if needed
     # LABELS already has native titles/excerpts
 
-    out = ARTICLES / f"digest-{day.isoformat()}.html"
     out.write_text(render_article(day, titles, excerpts, bodies), encoding="utf-8")
     upsert_catalog(day, titles, excerpts)
     bump_asset_cache(day)
