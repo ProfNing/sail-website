@@ -298,6 +298,23 @@ window.WEAVE_I18N = {
 /* Article catalog — multilingual bodies live on article pages via [data-lang] blocks */
 window.WEAVE_ARTICLES = [
   {
+    id: "digest-2026-09-09",
+    href: "digest-2026-09-09.html",
+    date: "2026-09-09",
+    minutes: 4,
+    topics: ["ai", "sus", "edu"],
+    title: {
+      en: "SAIL Daily Digest — Wednesday, September 9, 2026",
+      zh: "SAIL 每日简报 — 2026年9月9日（周三）",
+      ko: "SAIL 일일 요약 — 2026년 9월 9일 (수요일)",
+    },
+    excerpt: {
+      en: "Today’s public-source roundup: 9 headlines — 5 AI, 0 sustainability, 6 learning.",
+      zh: "今日公开来源速览：共 9 条——人工智能 5、可持续 0、学习 6。",
+      ko: "오늘 공개 출처 모음: 헤드라인 9건 — AI 5, 지속가능성 0, 학습 6.",
+    },
+  },
+  {
     id: "digest-2026-09-08",
     href: "digest-2026-09-08.html",
     date: "2026-09-08",
