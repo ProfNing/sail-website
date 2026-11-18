@@ -298,6 +298,23 @@ window.WEAVE_I18N = {
 /* Article catalog — multilingual bodies live on article pages via [data-lang] blocks */
 window.WEAVE_ARTICLES = [
   {
+    id: "digest-2026-11-18",
+    href: "digest-2026-11-18.html",
+    date: "2026-11-18",
+    minutes: 4,
+    topics: ["ai", "sus", "edu"],
+    title: {
+      en: "SAIL Daily Digest — Wednesday, November 18, 2026",
+      zh: "SAIL 每日简报 — 2026年11月18日（周三）",
+      ko: "SAIL 일일 요약 — 2026년 11월 18일 (수요일)",
+    },
+    excerpt: {
+      en: "Today’s public-source roundup: 9 headlines — 8 AI, 3 sustainability, 3 learning.",
+      zh: "今日公开来源速览：共 9 条——人工智能 8、可持续 3、学习 3。",
+      ko: "오늘 공개 출처 모음: 헤드라인 9건 — AI 8, 지속가능성 3, 학습 3.",
+    },
+  },
+  {
     id: "digest-2026-11-17",
     href: "digest-2026-11-17.html",
     date: "2026-11-17",
